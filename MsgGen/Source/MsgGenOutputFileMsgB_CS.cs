@@ -9,7 +9,7 @@ namespace MsgGen
     //**************************************************************************
     //**************************************************************************
 
-    public class OutputFileTMessageCS : OutputFileBase
+    public class OutputFileTMsgB_CS : OutputFileBase
     {
         //**********************************************************************
         //**********************************************************************
@@ -25,7 +25,7 @@ namespace MsgGen
         //**********************************************************************
         // Constructor
 
-        public OutputFileTMessageCS()
+        public OutputFileTMsgB_CS()
         {
             mNumNameSpace = 0;
             mWCS = null;
@@ -166,7 +166,7 @@ namespace MsgGen
 
             if (aBlock.mBlockType == Defs.cBlockT_Message)
             {
-               mWCS.WriteLine (1, "public class {0} : ByteTMessage", aBlock.mName);
+               mWCS.WriteLine (1, "public class {0} : ByteMsgB", aBlock.mName);
             }
             else
             {
@@ -296,7 +296,7 @@ namespace MsgGen
             mWCS.WriteBar  (1,3);
             mWCS.WriteLine (1, "// Copier");
             mWCS.WriteSkip ();
-            mWCS.WriteLine (1, "public class TMessageCopier : BaseTMessageCopier");
+            mWCS.WriteLine (1, "public class MsgBCopier : BaseMsgBCopier");
             mWCS.WriteLine (1, "{");
             mWCS.WriteSkip ();
 
@@ -308,9 +308,9 @@ namespace MsgGen
             mWCS.WriteBar  (2,3);
             mWCS.WriteLine (2, "// Create");
             mWCS.WriteSkip ();
-            mWCS.WriteLine (2, "public override ByteTMessage createMessage (int aMessageType)");
+            mWCS.WriteLine (2, "public override ByteMsgB createMessage (int aMessageType)");
             mWCS.WriteLine (2, "{");
-            mWCS.WriteLine (3, "ByteTMessage tMsg = null;");
+            mWCS.WriteLine (3, "ByteMsgB tMsg = null;");
             mWCS.WriteSkip ();
             mWCS.WriteLine (3, "switch (aMessageType)");
             mWCS.WriteLine (3, "{");
@@ -339,7 +339,7 @@ namespace MsgGen
             mWCS.WriteBar  (2,3);
             mWCS.WriteLine (2, "// Copy");
             mWCS.WriteSkip ();
-            mWCS.WriteLine (2, "public override void copyToFrom( ByteBuffer aBuffer, ByteTMessage aMsg)");
+            mWCS.WriteLine (2, "public override void copyToFrom( ByteBuffer aBuffer, ByteMsgB aMsg)");
             mWCS.WriteLine (2, "{");
             mWCS.WriteLine (3, "switch (aMsg.mMessageType)");
             mWCS.WriteLine (3, "{");

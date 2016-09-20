@@ -4,15 +4,15 @@ using      System.Text
 using      System.IO
 using      Ris
 
-define_ch   _BLUECOMMTMESSAGE_MESSAGE_H_
+define_ch   _MASSIVEMSG_H_
 include_ch  risByteBuffer.h
-include_ch  risByteTMessage.h
-include_ch  risByteTMessageCopier.h
+include_ch  risByteMsgB.h
+include_ch  risByteMsgBCopier.h
 include_cp  <stdio.h>
 include_cp  <string.h>
-include_cp  bluecommTMessage.h
+include_cp  massiveMsg.h
 
-namespace BlueCommMsg
+namespace MassiveMsg
 
 //******************************************************************************
 

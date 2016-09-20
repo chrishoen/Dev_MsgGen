@@ -255,12 +255,12 @@ namespace Example
     // into byte buffers and then extracts them into message objects that live
     // on the heap.
 
-    public class MessageParser : BaseMessageParser
+    public class MsgAParser : BaseMsgAParser
     {
         //--------------------------------------------------------------------------
 
         // Constructor
-        public MessageParser()
+        public MsgAParser()
         {
             mSourceId = 0;
         }
@@ -365,10 +365,10 @@ namespace Example
     // message parser. It is used by transmitters and receivers to create new
     // instances of message parsers.
 
-    public class MessageParserCreator : BaseMessageParserCreator
+    public class MsgAParserCreator : BaseMsgAParserCreator
     {
         // Constructor
-        public MessageParserCreator()
+        public MsgAParserCreator()
         {
            mSourceId = 0;
         }
@@ -380,14 +380,14 @@ namespace Example
         }
 
         // Create new message parser and configure it
-        public override BaseMessageParser createNew()
+        public override BaseMsgAParser createNew()
         {
            // New message parser
-           MessageParser tMessageParser = new MessageParser();
+           MsgAParser tMsgAParser = new MsgAParser();
            // Configure 
-           tMessageParser.configure(mSourceId);
+           tMsgAParser.configure(mSourceId);
            // Return base message parser pointer
-           return (BaseMessageParser)tMessageParser;
+           return (BaseMsgAParser)tMsgAParser;
         }
 
         // Members

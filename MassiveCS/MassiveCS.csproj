@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{06a89496-aa3d-4dd7-90da-f7170ab32163}</ProjectGuid>
+    <ProjectGuid>{06A89496-AA3D-4DD7-90DA-F7170AB32163}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MassiveCS</RootNamespace>
@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Source\MassiveMsg.cs" />
     <Compile Include="Source\MyCmdLineExec.cs" />
     <Compile Include="Source\Program.cs" />
   </ItemGroup>

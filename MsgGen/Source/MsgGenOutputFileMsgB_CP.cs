@@ -9,7 +9,7 @@ namespace MsgGen
     //**************************************************************************
     //**************************************************************************
 
-    public class OutputFileTMessageCP : OutputFileBase
+    public class OutputFileMsgB_CP : OutputFileBase
     {
         //**********************************************************************
         //**********************************************************************
@@ -25,7 +25,7 @@ namespace MsgGen
         //**********************************************************************
         // Constructor
 
-        public OutputFileTMessageCP()
+        public OutputFileMsgB_CP()
         {
             mNumNameSpace = 0;
             mWCP = null;
@@ -141,9 +141,9 @@ namespace MsgGen
             mWCP.WriteBar(1, 3);
             mWCP.WriteLine(1, "// Message Creator");
             mWCP.WriteSkip();
-            mWCP.WriteLine(1, "Ris::ByteTMessage* TMessageCopier::createMessage(int aMessageType)");
+            mWCP.WriteLine(1, "Ris::ByteMsgB* MsgBCopier::createMessage(int aMessageType)");
             mWCP.WriteLine(1, "{");
-            mWCP.WriteLine(2, "Ris::ByteTMessage* tMsg = 0;");
+            mWCP.WriteLine(2, "Ris::ByteMsgB* tMsg = 0;");
             mWCP.WriteSkip();
             mWCP.WriteLine(2, "switch (aMessageType)");
             mWCP.WriteLine(2, "{");
@@ -176,7 +176,7 @@ namespace MsgGen
             mWCP.WriteBar(1, 3);
             mWCP.WriteLine(1, "// Message Copy");
             mWCP.WriteSkip();
-            mWCP.WriteLine(1, "void TMessageCopier::copyToFrom( Ris::ByteBuffer* aBuffer, Ris::ByteTMessage* aMsg)");
+            mWCP.WriteLine(1, "void MsgBCopier::copyToFrom( Ris::ByteBuffer* aBuffer, Ris::ByteMsgB* aMsg)");
             mWCP.WriteLine(1, "{");
             mWCP.WriteLine(2, "switch (aMsg->mMessageType)");
             mWCP.WriteLine(2, "{");
@@ -257,7 +257,7 @@ namespace MsgGen
             // Copy
    
 
-            mWCP.WriteLine (1, "void TMessageCopier::copyToFrom (Ris::ByteBuffer* aBuffer, {0}* aMsg)",aBlock.mName);
+            mWCP.WriteLine (1, "void MsgBCopier::copyToFrom (Ris::ByteBuffer* aBuffer, {0}* aMsg)",aBlock.mName);
             mWCP.WriteLine (1, "{");
 
             aBlock.mMemberList.ForEach(delegate(MemberData tMember)
@@ -274,7 +274,7 @@ namespace MsgGen
                     }
                     else if (tMember.mMemberType == Defs.cMemberT_Record)
                     {
-                        mWCP.WriteLine (2, "TMessageCopier::copyToFrom (aBuffer, &aMsg->{0} );", stringExtend(tMember.mName,aBlock.mNameMaxSize));
+                        mWCP.WriteLine (2, "MsgBCopier::copyToFrom (aBuffer, &aMsg->{0} );", stringExtend(tMember.mName,aBlock.mNameMaxSize));
                     }
                     else
                     {
@@ -290,7 +290,7 @@ namespace MsgGen
                     }
                     if (tMember.mMemberType == Defs.cMemberT_Record)
                     {
-                        mWCP.WriteLine (2, "TMessageCopier::copyToFrom (aBuffer, &aMsg->{0}[i]);", tMember.mName);
+                        mWCP.WriteLine (2, "MsgBCopier::copyToFrom (aBuffer, &aMsg->{0}[i]);", tMember.mName);
                     }
                     else
                     {

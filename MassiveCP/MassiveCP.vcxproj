@@ -22,10 +22,12 @@
     <ClCompile Include="Source\CmdLineExec.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\MainInit.cpp" />
+    <ClCompile Include="Source\massiveMsg.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\CmdLineExec.h" />
     <ClInclude Include="Source\MainInit.h" />
+    <ClInclude Include="Source\massiveMsg.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{c90aca71-ecde-40d8-9d64-f6d44c6af861}</ProjectGuid>

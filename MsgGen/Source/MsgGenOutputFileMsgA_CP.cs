@@ -9,7 +9,7 @@ namespace MsgGen
     //**************************************************************************
     //**************************************************************************
 
-    public class OutputFileMsgCP : OutputFileBase
+    public class OutputFileMsgA_CP : OutputFileBase
     {
         //**********************************************************************
         //**********************************************************************
@@ -25,7 +25,7 @@ namespace MsgGen
         //**********************************************************************
         // Constructor
 
-        public OutputFileMsgCP()
+        public OutputFileMsgA_CP()
         {
             mNumNameSpace = 0;
             mWCP = null;
