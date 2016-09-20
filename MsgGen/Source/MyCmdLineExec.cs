@@ -42,11 +42,11 @@ namespace MainApp
 
         public void OnRun1(CmdLineCmd aCmd)
         {
-            String tReadFilePath = @"C:\Prime\DevelopSDSAT\Dev_DasComm\MsgDefinition\DasCommMsg.msg";
+            String tReadFilePath = @"C:\Prime\DevelopComm\Dev_MsgGen\Files\DasCommMsg.msg";
             
-            String tWriteFilePathCS = @"C:\Prime\DevelopSDSAT\Dev_DasComm\DasCommEngineLib\DasCommMsg.cs";
-            String tWriteFilePathCH = @"C:\Prime\DevelopSDSAT\Dev_DasComm\DasCommDasLib\Source\dascommMsg.h";
-            String tWriteFilePathCP = @"C:\Prime\DevelopSDSAT\Dev_DasComm\DasCommDasLib\Source\dascommMsg.cpp";
+            String tWriteFilePathCS = @"C:\Prime\DevelopComm\Dev_MsgGen\MassiveCS\Source\DasCommMsg.cs";
+            String tWriteFilePathCH = @"C:\Prime\DevelopComm\Dev_MsgGen\MassiveCP\Source\dascommMsg.h";
+            String tWriteFilePathCP = @"C:\Prime\DevelopComm\Dev_MsgGen\MassiveCP\Source\dascommMsg.cpp";
 
             MsgGen.FileData tFileData = new MsgGen.FileData();
             MsgGen.Reader.readFromFilePath(tFileData, tReadFilePath);
@@ -62,10 +62,10 @@ namespace MainApp
 
         public void OnRun2(CmdLineCmd aCmd)
         {
-            String tReadFilePath = @"C:\Prime\DevelopSDSAT\Dev_DasComm\Files\CommTestMsg.msg";
-            String tWriteFilePathCS = @"C:\Prime\DevelopSDSAT\Dev_DasComm\MsgLib_CS\CommTestMsg_Message.cs";
-            String tWriteFilePathCH = @"C:\Prime\DevelopSDSAT\Dev_DasComm\MsgLib_CP\commtestMsg_Message.h";
-            String tWriteFilePathCP = @"C:\Prime\DevelopSDSAT\Dev_DasComm\MsgLib_CP\commtestMsg_Message.cpp";
+            String tReadFilePath = @"C:\Prime\DevelopComm\Dev_MsgGen\Files\CommTestMsg.msg";
+            String tWriteFilePathCS = @"C:\Prime\DevelopComm\Dev_MsgGen\MsgLib_CS\CommTestMsg_Message.cs";
+            String tWriteFilePathCH = @"C:\Prime\DevelopComm\Dev_MsgGen\MsgLib_CP\commtestMsg_Message.h";
+            String tWriteFilePathCP = @"C:\Prime\DevelopComm\Dev_MsgGen\MsgLib_CP\commtestMsg_Message.cpp";
 
             MsgGen.FileData tFileData = new MsgGen.FileData();
             MsgGen.Reader.readFromFilePath(tFileData, tReadFilePath);
@@ -79,8 +79,8 @@ namespace MainApp
 
         public void OnGo1(CmdLineCmd aCmd)
         {
-            String tReadFilePath  = @"C:\Prime\DevelopSDSAT\Dev_DasComm\Files\BlueMsg.msg";
-            String tWriteFilePath = @"C:\Prime\DevelopSDSAT\Dev_DasComm\Files\BlueTMessage.cs";
+            String tReadFilePath  = @"C:\Prime\DevelopComm\Dev_MsgGen\Files\MassiveMsg.msg";
+            String tWriteFilePath = @"C:\Prime\DevelopComm\Dev_MsgGen\Files\MassiveMsg.cs";
 
             MsgGen.FileData tFileData = new MsgGen.FileData();
             MsgGen.Reader.readFromFilePath(tFileData,tReadFilePath);
@@ -91,8 +91,8 @@ namespace MainApp
 
         public void OnGo2(CmdLineCmd aCmd)
         {
-            String tReadFilePath  = @"C:\Prime\DevelopSDSAT\Dev_DasComm\Files\BlueMsg.msg";
-            String tWriteFilePath = @"C:\Prime\DevelopSDSAT\Dev_DasComm\Files\blueTMessage.h";
+            String tReadFilePath  = @"C:\Prime\DevelopComm\Dev_MsgGen\Files\MassiveMsg.msg";
+            String tWriteFilePath = @"C:\Prime\DevelopComm\Dev_MsgGen\Files\massiveMsg.h";
 
             MsgGen.FileData tFileData = new MsgGen.FileData();
             MsgGen.Reader.readFromFilePath(tFileData,tReadFilePath);
@@ -103,8 +103,8 @@ namespace MainApp
 
         public void OnGo3(CmdLineCmd aCmd)
         {
-            String tReadFilePath  = @"C:\Prime\DevelopSDSAT\Dev_DasComm\Files\BlueMsg.msg";
-            String tWriteFilePath = @"C:\Prime\DevelopSDSAT\Dev_DasComm\Files\blueTMessage.cpp";
+            String tReadFilePath  = @"C:\Prime\DevelopComm\Dev_MsgGen\Files\MassiveMsg.msg";
+            String tWriteFilePath = @"C:\Prime\DevelopComm\Dev_MsgGen\Files\massiveMsg.cpp";
 
             MsgGen.FileData tFileData = new MsgGen.FileData();
             MsgGen.Reader.readFromFilePath(tFileData,tReadFilePath);

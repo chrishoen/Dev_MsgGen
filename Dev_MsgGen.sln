@@ -11,6 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassiveCS", "MassiveCS\Mass
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{87A95662-AC1F-4D89-9F4C-2D4D022F32D7}"
 	ProjectSection(SolutionItems) = preProject
+		Files\DasCommMsg.msg = Files\DasCommMsg.msg
 		Files\MassiveMsg.msg = Files\MassiveMsg.msg
 	EndProjectSection
 EndProject
