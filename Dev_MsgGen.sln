@@ -9,6 +9,11 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MassiveCP", "MassiveCP\Mass
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassiveCS", "MassiveCS\MassiveCS.csproj", "{06A89496-AA3D-4DD7-90DA-F7170AB32163}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{87A95662-AC1F-4D89-9F4C-2D4D022F32D7}"
+	ProjectSection(SolutionItems) = preProject
+		Files\MassiveMsg.msg = Files\MassiveMsg.msg
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
