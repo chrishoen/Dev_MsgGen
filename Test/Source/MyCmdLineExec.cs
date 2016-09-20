@@ -75,7 +75,7 @@ namespace MainApp
 
         public void OnGo5(CmdLineCmd aCmd)
         {
-            aCmd.setArgDefault(1, 0x10);
+            aCmd.setArgDefault(1, 0x20);
 
             UInt64 tN = aCmd.argUInt64(1);
 
