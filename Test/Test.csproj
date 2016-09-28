@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="RisLib">
-      <HintPath>..\..\..\..\Alpha\RisLibCs\bin\Debug\RisLib.dll</HintPath>
+      <HintPath>..\..\..\..\Alpha\Lib\RisLibCs\bin\Debug\RisLib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Ris;
-using Example;
 
 namespace MainApp
 {
@@ -115,20 +114,6 @@ namespace MainApp
 
         public void OnGo4(CmdLineCmd aCmd)
         {
-            ByteBuffer tBuffer = new ByteBuffer(1000);
-
-            TestMsg tTxMsg = new TestMsg();
-            TestMsg tRxMsg = new TestMsg();
-
-            tTxMsg.initialize();
-
-            tBuffer.putToBuffer(tTxMsg);
-            Console.WriteLine("Buffer.Length {0}",tBuffer.mWorkingLength);
-
-            tBuffer.rewind();
-
-            tBuffer.getFromBuffer(tRxMsg);
-            tRxMsg.show();
         }
 
         //**********************************************************************
