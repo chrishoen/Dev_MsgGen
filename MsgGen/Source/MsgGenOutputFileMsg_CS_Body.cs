@@ -9,7 +9,7 @@ namespace MsgGen
     //**************************************************************************
     //**************************************************************************
 
-    public class OutputFileMsg_CS : OutputFileBase
+    public class OutputFileMsg_CS_Body : OutputFileBase
     {
         //**********************************************************************
         //**********************************************************************
@@ -25,7 +25,7 @@ namespace MsgGen
         //**********************************************************************
         // Constructor
 
-        public OutputFileMsg_CS()
+        public OutputFileMsg_CS_Body()
         {
             mNumNameSpace = 0;
             mWCS = null;
@@ -135,7 +135,7 @@ namespace MsgGen
             mWCS.WriteSkip ();
             mWCS.WriteLine (1,"{0}","public class MsgIdT");
             mWCS.WriteLine (1,"{0}","{");
-            mWCS.WriteLine (2,"{0}","public const int cUnspecified = 0;");
+            mWCS.WriteLine (2,"{0}","public const int cUnspecified =   0;");
 
             int tIdent = 1;
             mFileData.mBlockList.ForEach(delegate(BlockData tBlock)
@@ -159,9 +159,12 @@ namespace MsgGen
             mWCS.WriteBar  (1,3);
             mWCS.WriteLine (1, "// Message Creator");
             mWCS.WriteSkip ();
-            mWCS.WriteLine (1, "public class MessageCreator");
+            mWCS.WriteLine (1, "public class MsgCreator : Ris.BaseMsgCreator");
             mWCS.WriteLine (1, "{");
-            mWCS.WriteLine (2, "{0}", "public static BaseMsg createMessage(int aMessageType)");
+            mWCS.WriteBar  (2,1);
+            mWCS.WriteLine (2, "// Create a new message based on a message type.");
+            mWCS.WriteSkip ();
+            mWCS.WriteLine (2, "{0}", "public override Ris.ByteContent createMsg(int aMessageType)");
             mWCS.WriteLine (2, "{0}", "{");
             mWCS.WriteLine (3, "{0}", "BaseMsg tMsg = null;");
             mWCS.WriteSkip ();
@@ -204,46 +207,14 @@ namespace MsgGen
 
             if (aBlock.mBlockType == Defs.cBlockT_Message)
             {
-               mWCS.WriteLine (1, "public class {0} : BaseMsg", aBlock.mName);
+               mWCS.WriteLine (1, "public partial class {0} : BaseMsg", aBlock.mName);
             }
             else
             {
-               mWCS.WriteLine (1, "public class {0} : ByteContent", aBlock.mName);
+               mWCS.WriteLine (1, "public partial class {0} : ByteContent", aBlock.mName);
             }
 
             mWCS.WriteLine (1, "{");
-
-            //******************************************************************
-            //******************************************************************
-            //******************************************************************
-            // Members
-
-            mWCS.WriteBar  (2,1);
-            mWCS.WriteLine (2,"// Members");
-            mWCS.WriteSkip ();
-
-            if (aBlock.mConstList.Count > 0)
-            {
-                aBlock.mConstList.ForEach(delegate (ConstData tConst)
-                {
-                    mWCS.WriteLine(2, "public const int {0} = {1};", stringExtend(tConst.mName, aBlock.mConstMaxSize), tConst.mInitialValue);
-                });
-                mWCS.WriteSkip();
-            }
-
-            aBlock.mMemberList.ForEach(delegate(MemberData tMember)
-            {
-                if (!tMember.mIsArray)
-                {
-                    mWCS.WriteLine (2, "public {0} {1};", stringExtend(tMember.mTypeName,aBlock.mTypeMaxSize), tMember.mName);
-                }
-                else
-                {
-                    mWCS.WriteLine (2, "public {0} {1};", stringExtend(tMember.mTypeName + "[]",aBlock.mTypeMaxSize), tMember.mName);
-                }
-
-            });
-            mWCS.WriteSkip ();
 
             //******************************************************************
             //******************************************************************
@@ -260,7 +231,6 @@ namespace MsgGen
             if (aBlock.mBlockType == Defs.cBlockT_Message)
             {
                 mWCS.WriteLine (3, "{0} = MsgIdT.c{1};",stringExtend("mMessageType",aBlock.mNameMaxSize), aBlock.mName);
-                mWCS.WriteSkip ();
             }
 
             int  tMemberCount = 0;

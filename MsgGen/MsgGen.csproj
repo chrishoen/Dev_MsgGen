@@ -53,7 +53,8 @@
     <Compile Include="Source\MsgGenOutputFileBase.cs" />
     <Compile Include="Source\MsgGenOutputFileMsg_CH.cs" />
     <Compile Include="Source\MsgGenOutputFileMsg_CP.cs" />
-    <Compile Include="Source\MsgGenOutputFileMsg_CS.cs" />
+    <Compile Include="Source\MsgGenOutputFileMsg_CS_Body.cs" />
+    <Compile Include="Source\MsgGenOutputFileMsg_CS_Message.cs" />
     <Compile Include="Source\MsgGenReader.cs" />
     <Compile Include="Source\MsgGenWriter.cs" />
     <Compile Include="Source\MyCmdLineExec.cs" />

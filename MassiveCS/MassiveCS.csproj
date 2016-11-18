@@ -47,7 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Source\MassiveMsg.cs" />
+    <Compile Include="Source\MassiveMsgBase.cs" />
+    <Compile Include="Source\MassiveMsgBody.cs" />
+    <Compile Include="Source\MassiveMsgMessage.cs" />
     <Compile Include="Source\MyCmdLineExec.cs" />
     <Compile Include="Source\Program.cs" />
   </ItemGroup>

@@ -17,17 +17,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{87A95662
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MsgGen", "MsgGen\MsgGen.csproj", "{166BB3E5-4624-4808-A4C3-18D825B3CB22}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProtoComm", "ProtoComm", "{B2E51533-E3C0-49F7-BCFC-5E9C95059167}"
-	ProjectSection(SolutionItems) = preProject
-		ProtoComm\procoMsg.cpp = ProtoComm\procoMsg.cpp
-		ProtoComm\procoMsg.h = ProtoComm\procoMsg.h
-		ProtoComm\procoMsgBase.cpp = ProtoComm\procoMsgBase.cpp
-		ProtoComm\procoMsgBase.h = ProtoComm\procoMsgBase.h
-		ProtoComm\ProtoCommMsg.cs = ProtoComm\ProtoCommMsg.cs
-		ProtoComm\ProtoCommMsgBase.cs = ProtoComm\ProtoCommMsgBase.cs
-		ProtoComm\ProtoCommMsgMessage.cs = ProtoComm\ProtoCommMsgMessage.cs
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
