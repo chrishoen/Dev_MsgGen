@@ -51,12 +51,9 @@
     <Compile Include="Source\MsgGenInputFile.cs" />
     <Compile Include="Source\MsgGenMyStreamWriter.cs" />
     <Compile Include="Source\MsgGenOutputFileBase.cs" />
-    <Compile Include="Source\MsgGenOutputFileMsgA_CH.cs" />
-    <Compile Include="Source\MsgGenOutputFileMsgA_CP.cs" />
-    <Compile Include="Source\MsgGenOutputFileMsgA_CS.cs" />
-    <Compile Include="Source\MsgGenOutputFileMsgB_CH.cs" />
-    <Compile Include="Source\MsgGenOutputFileMsgB_CP.cs" />
-    <Compile Include="Source\MsgGenOutputFileMsgB_CS.cs" />
+    <Compile Include="Source\MsgGenOutputFileMsg_CH.cs" />
+    <Compile Include="Source\MsgGenOutputFileMsg_CP.cs" />
+    <Compile Include="Source\MsgGenOutputFileMsg_CS.cs" />
     <Compile Include="Source\MsgGenReader.cs" />
     <Compile Include="Source\MsgGenWriter.cs" />
     <Compile Include="Source\MyCmdLineExec.cs" />

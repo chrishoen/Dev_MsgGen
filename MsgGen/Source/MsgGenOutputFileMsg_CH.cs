@@ -9,7 +9,7 @@ namespace MsgGen
     //**************************************************************************
     //**************************************************************************
 
-    public class OutputFileMsgB_CH : OutputFileBase
+    public class OutputFileMsg_CH : OutputFileBase
     {
         //**********************************************************************
         //**********************************************************************
@@ -25,7 +25,7 @@ namespace MsgGen
         //**********************************************************************
         // Constructor
 
-        public OutputFileMsgB_CH()
+        public OutputFileMsg_CH()
         {
             mNumNameSpace = 0;
             mWCH = null;
@@ -74,13 +74,12 @@ namespace MsgGen
 
             writeFileBegin();
             writeIdentifiers();
+            writeMessageCreator();
 
             mFileData.mBlockList.ForEach(delegate(BlockData tBlock)
             {
                 writeBlock(tBlock);
             });
-
-            writeMessageCopier();
 
             writeFileEnd();
         }
@@ -170,6 +169,24 @@ namespace MsgGen
         //**********************************************************************
         //**********************************************************************
 
+        public void writeMessageCreator()
+        {
+            mWCH.WriteBar  (1,3);
+            mWCH.WriteLine (1, "// Message Creator");
+            mWCH.WriteSkip ();
+            mWCH.WriteLine (1, "class MessageCreator");
+            mWCH.WriteLine (1, "{");
+            mWCH.WriteLine (1, "public:");
+            mWCH.WriteSkip ();
+            mWCH.WriteLine (2, "static BaseMsg* createMessage(int aMessageType);");
+            mWCH.WriteLine (1, "};");
+            mWCH.WriteSkip ();
+        }
+
+        //**********************************************************************
+        //**********************************************************************
+        //**********************************************************************
+
         public void writeBlock(BlockData aBlock)
         {
             //******************************************************************
@@ -180,7 +197,14 @@ namespace MsgGen
             mWCH.WriteBar  (1,3);
             mWCH.WriteSkip ();
 
-            mWCH.WriteLine (1, "class {0}  : public Ris::ByteMsgB", aBlock.mName);
+            if (aBlock.mBlockType == Defs.cBlockT_Message)
+            {
+               mWCH.WriteLine (1, "class {0} : public BaseMsg", aBlock.mName);
+            }
+            else
+            {
+               mWCH.WriteLine (1, "class {0} : public Ris::ByteContent", aBlock.mName);
+            }
 
             mWCH.WriteLine (1, "{");
             mWCH.WriteLine (1, "public:");
@@ -237,49 +261,21 @@ namespace MsgGen
             //******************************************************************
             //******************************************************************
             //******************************************************************
+            // Copy
+
+            mWCH.WriteBar  (2,1);
+            mWCH.WriteLine (2,"// Copy");
+            mWCH.WriteSkip ();
+
+            mWCH.WriteLine (2, "void copyToFrom (Ris::ByteBuffer* aBuffer);");
+            mWCH.WriteSkip ();
+
+            //******************************************************************
+            //******************************************************************
+            //******************************************************************
             // Class End
 
             mWCH.WriteLine(1, "};");
-            mWCH.WriteSkip ();
-        }
-
-        //**********************************************************************
-        //**********************************************************************
-        //**********************************************************************
-
-        public void writeMessageCopier()
-        {
-            mWCH.WriteBar  (1,3);
-            mWCH.WriteLine (1, "// Message Creator");
-            mWCH.WriteSkip ();
-            mWCH.WriteLine (1, "class MsgBCopier : public Ris::BaseMsgBCopier");
-            mWCH.WriteLine (1, "{");
-            mWCH.WriteLine (1, "public:");
-            mWCH.WriteSkip ();
-            mWCH.WriteBar  (2,1);
-            mWCH.WriteLine (2,"// Create");
-            mWCH.WriteSkip ();
-            mWCH.WriteLine (2, "Ris::ByteMsgB* createMessage(int aMsgType);");
-            mWCH.WriteSkip ();
-            mWCH.WriteBar  (2,1);
-            mWCH.WriteLine (2,"// Copy");
-            mWCH.WriteSkip ();
-            mWCH.WriteLine (2, "void copyToFrom (Ris::ByteBuffer* aBuffer, Ris::ByteMsgB* aMsg);");
-            mWCH.WriteSkip ();
-            mWCH.WriteBar  (2,1);
-            mWCH.WriteLine (2,"// Copy");
-            mWCH.WriteSkip ();
-
-            mFileData.mBlockList.ForEach(delegate(BlockData tBlock)
-            {
-                if (tBlock.mBlockType == Defs.cBlockT_Message)
-                {
-                    mWCH.WriteLine (2, "void copyToFrom (Ris::ByteBuffer* aBuffer, {0}aMsg);", stringExtend(tBlock.mName+"*",mFileData.mNameMaxSize));
-                }
-            });
-            mWCH.WriteSkip ();
-
-            mWCH.WriteLine (1, "};");
             mWCH.WriteSkip ();
         }
 
