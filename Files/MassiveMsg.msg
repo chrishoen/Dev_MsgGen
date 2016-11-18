@@ -26,7 +26,14 @@ message TestMsg
 
 //******************************************************************************
 
-message StatusMsg
+message FirstMessageMsg
+{
+   int          mCode1
+}
+
+//******************************************************************************
+
+message StatusRequestMsg
 {
    int          mCode1
    int          mCode2
@@ -36,45 +43,32 @@ message StatusMsg
 
 //******************************************************************************
 
-message Data1Msg
+message StatusResponseMsg
 {
-   int     mCode1
-   int     mCode2
-   int     mCode3
-   int     mCode4
+   int          mCode1
+   int          mCode2
+   int          mCode3
+   int          mCode4
+   int          mWords [4]
 }
 
 //******************************************************************************
 
-message Data2Msg
+record  DataRecord
 {
-   int        mCode1
-   int        mCode2
-   int        mCode3
-   int        mCode4
-   Data1Msg   mData1
+   int          mCode1
+   int          mCode2
+   int          mCode3
+   int          mCode4
 }
 
 //******************************************************************************
 
-message Data3Msg
+message DataMag
 {
-   int     mCode1
-   int     mCode2
-   int     mCode3
-   int     mCode4
-   String  mString1 [40]
-   int     mCode5 [4]
+   int          mCode1
+   int          mCode2
+   int          mCode3
+   int          mCode4
+   DataRecord   mDataRecord
 }
-
-//******************************************************************************
-
-message Data4Msg
-{
-   int        mCode1
-   int        mCode2
-   int        mCode3
-   int        mCode4
-   Data1Msg   mData1 [4]
-}
-

@@ -35,11 +35,32 @@ void TestMsg::copyToFrom (Ris::ByteBuffer* aBuffer)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// StatusMsg
+// FirstMessageMsg
 
-StatusMsg::StatusMsg()
+FirstMessageMsg::FirstMessageMsg()
 {
-   mMessageType = MsgIdT::cStatusMsg;
+   mMessageType = MsgIdT::cFirstMessageMsg;
+
+   mCode1 = 0;
+}
+
+void FirstMessageMsg::copyToFrom (Ris::ByteBuffer* aBuffer)
+{
+   mHeader.headerCopyToFrom(aBuffer,this);
+
+   aBuffer->copy ( &mCode1 );
+
+   mHeader.headerReCopyToFrom(aBuffer,this);
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// StatusRequestMsg
+
+StatusRequestMsg::StatusRequestMsg()
+{
+   mMessageType = MsgIdT::cStatusRequestMsg;
 
    mCode1 = 0;
    mCode2 = 0;
@@ -47,7 +68,7 @@ StatusMsg::StatusMsg()
    mCode4 = 0;
 }
 
-void StatusMsg::copyToFrom (Ris::ByteBuffer* aBuffer)
+void StatusRequestMsg::copyToFrom (Ris::ByteBuffer* aBuffer)
 {
    mHeader.headerCopyToFrom(aBuffer,this);
 
@@ -62,111 +83,20 @@ void StatusMsg::copyToFrom (Ris::ByteBuffer* aBuffer)
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// Data1Msg
+// StatusResponseMsg
 
-Data1Msg::Data1Msg()
+StatusResponseMsg::StatusResponseMsg()
 {
-   mMessageType = MsgIdT::cData1Msg;
-
-   mCode1 = 0;
-   mCode2 = 0;
-   mCode3 = 0;
-   mCode4 = 0;
-}
-
-void Data1Msg::copyToFrom (Ris::ByteBuffer* aBuffer)
-{
-   mHeader.headerCopyToFrom(aBuffer,this);
-
-   aBuffer->copy ( &mCode1 );
-   aBuffer->copy ( &mCode2 );
-   aBuffer->copy ( &mCode3 );
-   aBuffer->copy ( &mCode4 );
-
-   mHeader.headerReCopyToFrom(aBuffer,this);
-}
-
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-// Data2Msg
-
-Data2Msg::Data2Msg()
-{
-   mMessageType = MsgIdT::cData2Msg;
-
-   mCode1 = 0;
-   mCode2 = 0;
-   mCode3 = 0;
-   mCode4 = 0;
-}
-
-void Data2Msg::copyToFrom (Ris::ByteBuffer* aBuffer)
-{
-   mHeader.headerCopyToFrom(aBuffer,this);
-
-   aBuffer->copy ( &mCode1 );
-   aBuffer->copy ( &mCode2 );
-   aBuffer->copy ( &mCode3 );
-   aBuffer->copy ( &mCode4 );
-   aBuffer->copy ( &mData1 );
-
-   mHeader.headerReCopyToFrom(aBuffer,this);
-}
-
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-// Data3Msg
-
-Data3Msg::Data3Msg()
-{
-   mMessageType = MsgIdT::cData3Msg;
+   mMessageType = MsgIdT::cStatusResponseMsg;
 
    mCode1     = 0;
    mCode2     = 0;
    mCode3     = 0;
    mCode4     = 0;
-   mString1[0]=0;
-   mCode5Loop = 4;
+   mWordsLoop = 4;
 }
 
-void Data3Msg::copyToFrom (Ris::ByteBuffer* aBuffer)
-{
-   mHeader.headerCopyToFrom(aBuffer,this);
-
-   aBuffer->copy ( &mCode1     );
-   aBuffer->copy ( &mCode2     );
-   aBuffer->copy ( &mCode3     );
-   aBuffer->copy ( &mCode4     );
-   aBuffer->copyS(  mString1   );
-
-   aBuffer->copy ( &mCode5Loop );
-   for (int i=0;  i<mCode5Loop; i++)
-   {
-   aBuffer->copy ( &mCode5[i]  );
-   }
-
-   mHeader.headerReCopyToFrom(aBuffer,this);
-}
-
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-// Data4Msg
-
-Data4Msg::Data4Msg()
-{
-   mMessageType = MsgIdT::cData4Msg;
-
-   mCode1     = 0;
-   mCode2     = 0;
-   mCode3     = 0;
-   mCode4     = 0;
-   mData1Loop = 4;
-}
-
-void Data4Msg::copyToFrom (Ris::ByteBuffer* aBuffer)
+void StatusResponseMsg::copyToFrom (Ris::ByteBuffer* aBuffer)
 {
    mHeader.headerCopyToFrom(aBuffer,this);
 
@@ -175,11 +105,60 @@ void Data4Msg::copyToFrom (Ris::ByteBuffer* aBuffer)
    aBuffer->copy ( &mCode3     );
    aBuffer->copy ( &mCode4     );
 
-   aBuffer->copy ( &mData1Loop );
-   for (int i=0;  i<mData1Loop; i++)
+   aBuffer->copy ( &mWordsLoop );
+   for (int i=0;  i<mWordsLoop; i++)
    {
-   aBuffer->copy ( &mData1[i]  );
+   aBuffer->copy ( &mWords[i]  );
    }
+
+   mHeader.headerReCopyToFrom(aBuffer,this);
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// DataRecord
+
+DataRecord::DataRecord()
+{
+   mCode1 = 0;
+   mCode2 = 0;
+   mCode3 = 0;
+   mCode4 = 0;
+}
+
+void DataRecord::copyToFrom (Ris::ByteBuffer* aBuffer)
+{
+   aBuffer->copy ( &mCode1 );
+   aBuffer->copy ( &mCode2 );
+   aBuffer->copy ( &mCode3 );
+   aBuffer->copy ( &mCode4 );
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// DataMag
+
+DataMag::DataMag()
+{
+   mMessageType = MsgIdT::cDataMag;
+
+   mCode1      = 0;
+   mCode2      = 0;
+   mCode3      = 0;
+   mCode4      = 0;
+}
+
+void DataMag::copyToFrom (Ris::ByteBuffer* aBuffer)
+{
+   mHeader.headerCopyToFrom(aBuffer,this);
+
+   aBuffer->copy ( &mCode1      );
+   aBuffer->copy ( &mCode2      );
+   aBuffer->copy ( &mCode3      );
+   aBuffer->copy ( &mCode4      );
+   aBuffer->copy ( &mDataRecord );
 
    mHeader.headerReCopyToFrom(aBuffer,this);
 }
@@ -198,20 +177,17 @@ Ris::ByteContent* MsgCreator::createMsg (int aMessageType)
       case MsgIdT::cTestMsg :
          tMsg = new TestMsg();
          break;
-      case MsgIdT::cStatusMsg :
-         tMsg = new StatusMsg();
+      case MsgIdT::cFirstMessageMsg :
+         tMsg = new FirstMessageMsg();
          break;
-      case MsgIdT::cData1Msg :
-         tMsg = new Data1Msg();
+      case MsgIdT::cStatusRequestMsg :
+         tMsg = new StatusRequestMsg();
          break;
-      case MsgIdT::cData2Msg :
-         tMsg = new Data2Msg();
+      case MsgIdT::cStatusResponseMsg :
+         tMsg = new StatusResponseMsg();
          break;
-      case MsgIdT::cData3Msg :
-         tMsg = new Data3Msg();
-         break;
-      case MsgIdT::cData4Msg :
-         tMsg = new Data4Msg();
+      case MsgIdT::cDataMag :
+         tMsg = new DataMag();
          break;
       default :
          break;

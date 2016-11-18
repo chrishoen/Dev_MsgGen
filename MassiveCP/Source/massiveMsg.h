@@ -18,12 +18,11 @@ class MsgIdT
 public:
 
     static const int cUnspecified =   0;
-    static const int cTestMsg     =   1;
-    static const int cStatusMsg   =   2;
-    static const int cData1Msg    =   3;
-    static const int cData2Msg    =   4;
-    static const int cData3Msg    =   5;
-    static const int cData4Msg    =   6;
+    static const int cTestMsg           =   1;
+    static const int cFirstMessageMsg   =   2;
+    static const int cStatusRequestMsg  =   3;
+    static const int cStatusResponseMsg =   4;
+    static const int cDataMag           =   5;
 };
 
 //******************************************************************************
@@ -53,7 +52,27 @@ public:
 //******************************************************************************
 //******************************************************************************
 
-class StatusMsg : public BaseMsg
+class FirstMessageMsg : public BaseMsg
+{
+public:
+
+    //**************************************************************************
+    // Members:
+
+    int mCode1;
+
+    //**************************************************************************
+    // Methods:
+
+    FirstMessageMsg();
+    void copyToFrom (Ris::ByteBuffer* aBuffer);
+};
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+class StatusRequestMsg : public BaseMsg
 {
 public:
 
@@ -68,7 +87,7 @@ public:
     //**************************************************************************
     // Methods:
 
-    StatusMsg();
+    StatusRequestMsg();
     void copyToFrom (Ris::ByteBuffer* aBuffer);
 };
 
@@ -76,7 +95,32 @@ public:
 //******************************************************************************
 //******************************************************************************
 
-class Data1Msg : public BaseMsg
+class StatusResponseMsg : public BaseMsg
+{
+public:
+
+    //**************************************************************************
+    // Members:
+
+    int   mCode1;
+    int   mCode2;
+    int   mCode3;
+    int   mCode4;
+    int   mWordsLoop;
+    int   mWords [4];
+
+    //**************************************************************************
+    // Methods:
+
+    StatusResponseMsg();
+    void copyToFrom (Ris::ByteBuffer* aBuffer);
+};
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+class DataRecord : public Ris::ByteContent
 {
 public:
 
@@ -91,7 +135,7 @@ public:
     //**************************************************************************
     // Methods:
 
-    Data1Msg();
+    DataRecord();
     void copyToFrom (Ris::ByteBuffer* aBuffer);
 };
 
@@ -99,57 +143,7 @@ public:
 //******************************************************************************
 //******************************************************************************
 
-class Data2Msg : public BaseMsg
-{
-public:
-
-    //**************************************************************************
-    // Members:
-
-    int      mCode1;
-    int      mCode2;
-    int      mCode3;
-    int      mCode4;
-    Data1Msg mData1;
-
-    //**************************************************************************
-    // Methods:
-
-    Data2Msg();
-    void copyToFrom (Ris::ByteBuffer* aBuffer);
-};
-
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-
-class Data3Msg : public BaseMsg
-{
-public:
-
-    //**************************************************************************
-    // Members:
-
-    int    mCode1;
-    int    mCode2;
-    int    mCode3;
-    int    mCode4;
-    char   mString1 [40];
-    int    mCode5Loop;
-    int    mCode5 [4];
-
-    //**************************************************************************
-    // Methods:
-
-    Data3Msg();
-    void copyToFrom (Ris::ByteBuffer* aBuffer);
-};
-
-//******************************************************************************
-//******************************************************************************
-//******************************************************************************
-
-class Data4Msg : public BaseMsg
+class DataMag : public BaseMsg
 {
 public:
 
@@ -160,13 +154,12 @@ public:
     int        mCode2;
     int        mCode3;
     int        mCode4;
-    int        mData1Loop;
-    Data1Msg   mData1 [4];
+    DataRecord mDataRecord;
 
     //**************************************************************************
     // Methods:
 
-    Data4Msg();
+    DataMag();
     void copyToFrom (Ris::ByteBuffer* aBuffer);
 };
 
