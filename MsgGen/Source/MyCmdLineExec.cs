@@ -68,18 +68,6 @@ namespace MainApp
         public void OnGo1(CmdLineCmd aCmd)
         {
             String tReadFilePath  = @"C:\Prime\DevelopComm\Dev_MsgGen\Files\MassiveMsg.msg";
-            String tWriteFilePath = @"C:\Prime\DevelopComm\Dev_MsgGen\\MassiveCS\Source\MassiveMsg.cs";
-
-            MsgGen.FileData tFileData = new MsgGen.FileData();
-            MsgGen.Reader.readFromFilePath(tFileData,tReadFilePath);
-            MsgGen.Writer.writeToFilePath(new MsgGen.OutputFileMsg_CS(),tFileData,tWriteFilePath);
-        }
-
-        //**********************************************************************
-
-        public void OnGo2(CmdLineCmd aCmd)
-        {
-            String tReadFilePath  = @"C:\Prime\DevelopComm\Dev_MsgGen\Files\MassiveMsg.msg";
             String tWriteFilePath = @"C:\Prime\DevelopComm\Dev_MsgGen\MassiveCP\Source\massiveMsg.h";
 
             MsgGen.FileData tFileData = new MsgGen.FileData();
@@ -89,7 +77,7 @@ namespace MainApp
 
         //**********************************************************************
 
-        public void OnGo3(CmdLineCmd aCmd)
+        public void OnGo2(CmdLineCmd aCmd)
         {
             String tReadFilePath  = @"C:\Prime\DevelopComm\Dev_MsgGen\Files\MassiveMsg.msg";
             String tWriteFilePath = @"C:\Prime\DevelopComm\Dev_MsgGen\MassiveCP\Source\massiveMsg.cpp";
@@ -97,6 +85,18 @@ namespace MainApp
             MsgGen.FileData tFileData = new MsgGen.FileData();
             MsgGen.Reader.readFromFilePath(tFileData,tReadFilePath);
             MsgGen.Writer.writeToFilePath(new MsgGen.OutputFileMsg_CP(),tFileData,tWriteFilePath);
+        }
+
+        //**********************************************************************
+
+        public void OnGo3(CmdLineCmd aCmd)
+        {
+            String tReadFilePath  = @"C:\Prime\DevelopComm\Dev_MsgGen\Files\MassiveMsg.msg";
+            String tWriteFilePath = @"C:\Prime\DevelopComm\Dev_MsgGen\\MassiveCS\Source\MassiveMsg.cs";
+
+            MsgGen.FileData tFileData = new MsgGen.FileData();
+            MsgGen.Reader.readFromFilePath(tFileData,tReadFilePath);
+            MsgGen.Writer.writeToFilePath(new MsgGen.OutputFileMsg_CS(),tFileData,tWriteFilePath);
         }
 
         //**********************************************************************

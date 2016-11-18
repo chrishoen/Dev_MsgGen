@@ -25,8 +25,46 @@ namespace MassiveMsg
     //***************************************************************************
     //***************************************************************************
     //***************************************************************************
+    // Message Creator
 
-    public class TestMsg : ByteMsgB
+    public class MessageCreator
+    {
+        public static BaseMsg createMessage(int aMessageType)
+        {
+            BaseMsg tMsg = null;
+
+            switch (aMessageType)
+            {
+                case MsgIdT.cTestMsg :
+                    tMsg = new TestMsg();
+                    break;
+                case MsgIdT.cStatusMsg :
+                    tMsg = new StatusMsg();
+                    break;
+                case MsgIdT.cData1Msg :
+                    tMsg = new Data1Msg();
+                    break;
+                case MsgIdT.cData2Msg :
+                    tMsg = new Data2Msg();
+                    break;
+                case MsgIdT.cData3Msg :
+                    tMsg = new Data3Msg();
+                    break;
+                case MsgIdT.cData4Msg :
+                    tMsg = new Data4Msg();
+                    break;
+                default :
+                    break;
+            }
+            return tMsg;
+        }
+    };
+
+    //***************************************************************************
+    //***************************************************************************
+    //***************************************************************************
+
+    public class TestMsg : BaseMsg
     {
         //***********************************************************************
         // Members
@@ -48,13 +86,28 @@ namespace MassiveMsg
             mCode3 = 0;
             mCode4 = 0;
         }
+
+        //***********************************************************************
+        // Copy
+
+        public override void copyToFrom (ByteBuffer aBuffer)
+        {
+            mHeader.headerCopyToFrom(aBuffer,this);
+
+            aBuffer.copy ( ref mCode1 );
+            aBuffer.copy ( ref mCode2 );
+            aBuffer.copy ( ref mCode3 );
+            aBuffer.copy ( ref mCode4 );
+
+            mHeader.headerReCopyToFrom(aBuffer,this);
+        }
     };
 
     //***************************************************************************
     //***************************************************************************
     //***************************************************************************
 
-    public class StatusMsg : ByteMsgB
+    public class StatusMsg : BaseMsg
     {
         //***********************************************************************
         // Members
@@ -76,13 +129,28 @@ namespace MassiveMsg
             mCode3 = 0;
             mCode4 = 0;
         }
+
+        //***********************************************************************
+        // Copy
+
+        public override void copyToFrom (ByteBuffer aBuffer)
+        {
+            mHeader.headerCopyToFrom(aBuffer,this);
+
+            aBuffer.copy ( ref mCode1 );
+            aBuffer.copy ( ref mCode2 );
+            aBuffer.copy ( ref mCode3 );
+            aBuffer.copy ( ref mCode4 );
+
+            mHeader.headerReCopyToFrom(aBuffer,this);
+        }
     };
 
     //***************************************************************************
     //***************************************************************************
     //***************************************************************************
 
-    public class Data1Msg : ByteMsgB
+    public class Data1Msg : BaseMsg
     {
         //***********************************************************************
         // Members
@@ -104,13 +172,28 @@ namespace MassiveMsg
             mCode3 = 0;
             mCode4 = 0;
         }
+
+        //***********************************************************************
+        // Copy
+
+        public override void copyToFrom (ByteBuffer aBuffer)
+        {
+            mHeader.headerCopyToFrom(aBuffer,this);
+
+            aBuffer.copy ( ref mCode1 );
+            aBuffer.copy ( ref mCode2 );
+            aBuffer.copy ( ref mCode3 );
+            aBuffer.copy ( ref mCode4 );
+
+            mHeader.headerReCopyToFrom(aBuffer,this);
+        }
     };
 
     //***************************************************************************
     //***************************************************************************
     //***************************************************************************
 
-    public class Data2Msg : ByteMsgB
+    public class Data2Msg : BaseMsg
     {
         //***********************************************************************
         // Members
@@ -134,13 +217,29 @@ namespace MassiveMsg
             mCode4 = 0;
             mData1 = new Data1Msg();
         }
+
+        //***********************************************************************
+        // Copy
+
+        public override void copyToFrom (ByteBuffer aBuffer)
+        {
+            mHeader.headerCopyToFrom(aBuffer,this);
+
+            aBuffer.copy ( ref mCode1 );
+            aBuffer.copy ( ref mCode2 );
+            aBuffer.copy ( ref mCode3 );
+            aBuffer.copy ( ref mCode4 );
+            aBuffer.copy (     mData1 );
+
+            mHeader.headerReCopyToFrom(aBuffer,this);
+        }
     };
 
     //***************************************************************************
     //***************************************************************************
     //***************************************************************************
 
-    public class Data3Msg : ByteMsgB
+    public class Data3Msg : BaseMsg
     {
         //***********************************************************************
         // Members
@@ -170,13 +269,35 @@ namespace MassiveMsg
             mCode5     = new int[4];
 
         }
+
+        //***********************************************************************
+        // Copy
+
+        public override void copyToFrom (ByteBuffer aBuffer)
+        {
+            mHeader.headerCopyToFrom(aBuffer,this);
+
+            aBuffer.copy ( ref mCode1 );
+            aBuffer.copy ( ref mCode2 );
+            aBuffer.copy ( ref mCode3 );
+            aBuffer.copy ( ref mCode4 );
+            aBuffer.copyS( ref mString1 );
+
+            aBuffer.copy ( ref mCode5Loop );
+            for (int i = 0;  i<mCode5Loop; i++ )
+            {
+            aBuffer.copy ( ref mCode5[i] );
+            }
+
+            mHeader.headerReCopyToFrom(aBuffer,this);
+        }
     };
 
     //***************************************************************************
     //***************************************************************************
     //***************************************************************************
 
-    public class Data4Msg : ByteMsgB
+    public class Data4Msg : BaseMsg
     {
         //***********************************************************************
         // Members
@@ -207,159 +328,27 @@ namespace MassiveMsg
             mData1[i]  = new Data1Msg();
             }
         }
-    };
 
-    //***************************************************************************
-    //***************************************************************************
-    //***************************************************************************
-    // Copier
-
-    public class MsgBCopier : BaseMsgBCopier
-    {
-
-        //***********************************************************************
-        //***********************************************************************
-        //***********************************************************************
-        // Create
-
-        public override ByteMsgB createMessage (int aMessageType)
-        {
-            ByteMsgB tMsg = null;
-
-            switch (aMessageType)
-            {
-                case MsgIdT.cTestMsg :
-                    tMsg = new TestMsg();
-                    break;
-                case MsgIdT.cStatusMsg :
-                    tMsg = new StatusMsg();
-                    break;
-                case MsgIdT.cData1Msg :
-                    tMsg = new Data1Msg();
-                    break;
-                case MsgIdT.cData2Msg :
-                    tMsg = new Data2Msg();
-                    break;
-                case MsgIdT.cData3Msg :
-                    tMsg = new Data3Msg();
-                    break;
-                case MsgIdT.cData4Msg :
-                    tMsg = new Data4Msg();
-                    break;
-            }
-
-            return tMsg;
-        }
-
-        //***********************************************************************
-        //***********************************************************************
         //***********************************************************************
         // Copy
 
-        public override void copyToFrom( ByteBuffer aBuffer, ByteMsgB aMsg)
+        public override void copyToFrom (ByteBuffer aBuffer)
         {
-            switch (aMsg.mMessageType)
+            mHeader.headerCopyToFrom(aBuffer,this);
+
+            aBuffer.copy ( ref mCode1 );
+            aBuffer.copy ( ref mCode2 );
+            aBuffer.copy ( ref mCode3 );
+            aBuffer.copy ( ref mCode4 );
+
+            aBuffer.copy ( ref mData1Loop );
+            for (int i = 0;  i<mData1Loop; i++ )
             {
-                case MsgIdT.cTestMsg :
-                    copyToFrom(aBuffer, (TestMsg)aMsg);
-                    break;
-                case MsgIdT.cStatusMsg :
-                    copyToFrom(aBuffer, (StatusMsg)aMsg);
-                    break;
-                case MsgIdT.cData1Msg :
-                    copyToFrom(aBuffer, (Data1Msg)aMsg);
-                    break;
-                case MsgIdT.cData2Msg :
-                    copyToFrom(aBuffer, (Data2Msg)aMsg);
-                    break;
-                case MsgIdT.cData3Msg :
-                    copyToFrom(aBuffer, (Data3Msg)aMsg);
-                    break;
-                case MsgIdT.cData4Msg :
-                    copyToFrom(aBuffer, (Data4Msg)aMsg);
-                    break;
+            aBuffer.copy (     mData1[i] );
             }
+
+            mHeader.headerReCopyToFrom(aBuffer,this);
         }
+    };
 
-        //***********************************************************************
-        //***********************************************************************
-        //***********************************************************************
-        // Copy TestMsg
-
-        public void copyToFrom( ByteBuffer aBuffer, TestMsg aMsg)
-        {
-            aBuffer.copy ( ref aMsg.mCode1 );
-            aBuffer.copy ( ref aMsg.mCode2 );
-            aBuffer.copy ( ref aMsg.mCode3 );
-            aBuffer.copy ( ref aMsg.mCode4 );
-        }
-
-        //***********************************************************************
-        // Copy StatusMsg
-
-        public void copyToFrom( ByteBuffer aBuffer, StatusMsg aMsg)
-        {
-            aBuffer.copy ( ref aMsg.mCode1 );
-            aBuffer.copy ( ref aMsg.mCode2 );
-            aBuffer.copy ( ref aMsg.mCode3 );
-            aBuffer.copy ( ref aMsg.mCode4 );
-        }
-
-        //***********************************************************************
-        // Copy Data1Msg
-
-        public void copyToFrom( ByteBuffer aBuffer, Data1Msg aMsg)
-        {
-            aBuffer.copy ( ref aMsg.mCode1 );
-            aBuffer.copy ( ref aMsg.mCode2 );
-            aBuffer.copy ( ref aMsg.mCode3 );
-            aBuffer.copy ( ref aMsg.mCode4 );
-        }
-
-        //***********************************************************************
-        // Copy Data2Msg
-
-        public void copyToFrom( ByteBuffer aBuffer, Data2Msg aMsg)
-        {
-            aBuffer.copy ( ref aMsg.mCode1 );
-            aBuffer.copy ( ref aMsg.mCode2 );
-            aBuffer.copy ( ref aMsg.mCode3 );
-            aBuffer.copy ( ref aMsg.mCode4 );
-            copyToFrom(aBuffer,aMsg.mData1 );
-        }
-
-        //***********************************************************************
-        // Copy Data3Msg
-
-        public void copyToFrom( ByteBuffer aBuffer, Data3Msg aMsg)
-        {
-            aBuffer.copy ( ref aMsg.mCode1 );
-            aBuffer.copy ( ref aMsg.mCode2 );
-            aBuffer.copy ( ref aMsg.mCode3 );
-            aBuffer.copy ( ref aMsg.mCode4 );
-            aBuffer.copyS( ref aMsg.mString1 );
-            aBuffer.copy ( ref aMsg.mCode5Loop );
-            for (int i = 0;  i<aMsg.mCode5Loop; i++ )
-            {
-            aBuffer.copy ( ref aMsg.mCode5[i] );
-            }
-        }
-
-        //***********************************************************************
-        // Copy Data4Msg
-
-        public void copyToFrom( ByteBuffer aBuffer, Data4Msg aMsg)
-        {
-            aBuffer.copy ( ref aMsg.mCode1 );
-            aBuffer.copy ( ref aMsg.mCode2 );
-            aBuffer.copy ( ref aMsg.mCode3 );
-            aBuffer.copy ( ref aMsg.mCode4 );
-            aBuffer.copy ( ref aMsg.mData1Loop );
-            for (int i = 0;  i<aMsg.mData1Loop; i++ )
-            {
-            copyToFrom(aBuffer,aMsg.mData1[i]);
-            }
-        }
-
-    }
 }

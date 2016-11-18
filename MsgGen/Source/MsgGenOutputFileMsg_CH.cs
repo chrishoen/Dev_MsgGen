@@ -74,13 +74,13 @@ namespace MsgGen
 
             writeFileBegin();
             writeIdentifiers();
-            writeMessageCreator();
 
             mFileData.mBlockList.ForEach(delegate(BlockData tBlock)
             {
                 writeBlock(tBlock);
             });
 
+            writeMessageCreator();
             writeFileEnd();
         }
 
@@ -150,7 +150,7 @@ namespace MsgGen
             mWCH.WriteLine (1, "{");
             mWCH.WriteLine (1, "public:");
             mWCH.WriteSkip ();
-            mWCH.WriteLine (2, "static const int cUnspecified = 0;");
+            mWCH.WriteLine (2, "static const int cUnspecified =   0;");
 
             int ident=1;
             mFileData.mBlockList.ForEach(delegate(BlockData tBlock)
@@ -172,13 +172,15 @@ namespace MsgGen
         public void writeMessageCreator()
         {
             mWCH.WriteBar  (1,3);
-            mWCH.WriteLine (1, "// Message Creator");
+            mWCH.WriteLine (1, "// Message Creator:");
             mWCH.WriteSkip ();
-            mWCH.WriteLine (1, "class MessageCreator");
+            mWCH.WriteLine (1, "class MsgCreator : public Ris::BaseMsgCreator");
             mWCH.WriteLine (1, "{");
             mWCH.WriteLine (1, "public:");
+            mWCH.WriteBar  (2,1);
+            mWCH.WriteLine (2, "// Create a new message, based on a message type.");
             mWCH.WriteSkip ();
-            mWCH.WriteLine (2, "static BaseMsg* createMessage(int aMessageType);");
+            mWCH.WriteLine (2, "Ris::ByteContent* createMsg (int aMessageType) override;");
             mWCH.WriteLine (1, "};");
             mWCH.WriteSkip ();
         }
@@ -216,7 +218,7 @@ namespace MsgGen
             // Members
 
             mWCH.WriteBar  (2,1);
-            mWCH.WriteLine (2,"// Members");
+            mWCH.WriteLine (2,"// Members:");
             mWCH.WriteSkip ();
 
             if (aBlock.mConstList.Count > 0)
@@ -249,26 +251,14 @@ namespace MsgGen
             //******************************************************************
             //******************************************************************
             //******************************************************************
-            // Constructor
+            // Methods
 
             mWCH.WriteBar  (2,1);
-            mWCH.WriteLine (2,"// Constructor");
+            mWCH.WriteLine (2,"// Methods:");
             mWCH.WriteSkip ();
 
             mWCH.WriteLine (2, "{0}();",aBlock.mName);
-            mWCH.WriteSkip ();
-
-            //******************************************************************
-            //******************************************************************
-            //******************************************************************
-            // Copy
-
-            mWCH.WriteBar  (2,1);
-            mWCH.WriteLine (2,"// Copy");
-            mWCH.WriteSkip ();
-
             mWCH.WriteLine (2, "void copyToFrom (Ris::ByteBuffer* aBuffer);");
-            mWCH.WriteSkip ();
 
             //******************************************************************
             //******************************************************************

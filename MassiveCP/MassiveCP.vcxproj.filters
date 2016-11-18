@@ -19,6 +19,9 @@
     <ClCompile Include="Source\massiveMsg.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\massiveMsgBase.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\CmdLineExec.h">
@@ -28,6 +31,9 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\massiveMsg.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\massiveMsgBase.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>

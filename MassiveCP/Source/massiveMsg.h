@@ -1,9 +1,9 @@
 #ifndef _MASSIVEMSG_H_
 #define _MASSIVEMSG_H_
 
-#include "risByteBuffer.h"
-#include "risByteMsgB.h"
-#include "risByteMsgBCopier.h"
+#include "risByteContent.h"
+#include "risByteMsgMonkey.h"
+#include "massiveMsgBase.h"
 
 namespace MassiveMsg
 {
@@ -17,7 +17,7 @@ namespace MassiveMsg
     {
     public:
 
-        static const int cUnspecified = 0;
+        static const int cUnspecified =   0;
         static const int cTestMsg     =   1;
         static const int cStatusMsg   =   2;
         static const int cData1Msg    =   3;
@@ -30,12 +30,12 @@ namespace MassiveMsg
     //***************************************************************************
     //***************************************************************************
 
-    class TestMsg  : public Ris::ByteMsgB
+    class TestMsg : public BaseMsg
     {
     public:
 
         //***********************************************************************
-        // Members
+        // Members:
 
         int mCode1;
         int mCode2;
@@ -43,22 +43,22 @@ namespace MassiveMsg
         int mCode4;
 
         //***********************************************************************
-        // Constructor
+        // Methods:
 
         TestMsg();
-
+        void copyToFrom (Ris::ByteBuffer* aBuffer);
     };
 
     //***************************************************************************
     //***************************************************************************
     //***************************************************************************
 
-    class StatusMsg  : public Ris::ByteMsgB
+    class StatusMsg : public BaseMsg
     {
     public:
 
         //***********************************************************************
-        // Members
+        // Members:
 
         int mCode1;
         int mCode2;
@@ -66,22 +66,22 @@ namespace MassiveMsg
         int mCode4;
 
         //***********************************************************************
-        // Constructor
+        // Methods:
 
         StatusMsg();
-
+        void copyToFrom (Ris::ByteBuffer* aBuffer);
     };
 
     //***************************************************************************
     //***************************************************************************
     //***************************************************************************
 
-    class Data1Msg  : public Ris::ByteMsgB
+    class Data1Msg : public BaseMsg
     {
     public:
 
         //***********************************************************************
-        // Members
+        // Members:
 
         int mCode1;
         int mCode2;
@@ -89,22 +89,22 @@ namespace MassiveMsg
         int mCode4;
 
         //***********************************************************************
-        // Constructor
+        // Methods:
 
         Data1Msg();
-
+        void copyToFrom (Ris::ByteBuffer* aBuffer);
     };
 
     //***************************************************************************
     //***************************************************************************
     //***************************************************************************
 
-    class Data2Msg  : public Ris::ByteMsgB
+    class Data2Msg : public BaseMsg
     {
     public:
 
         //***********************************************************************
-        // Members
+        // Members:
 
         int      mCode1;
         int      mCode2;
@@ -113,22 +113,22 @@ namespace MassiveMsg
         Data1Msg mData1;
 
         //***********************************************************************
-        // Constructor
+        // Methods:
 
         Data2Msg();
-
+        void copyToFrom (Ris::ByteBuffer* aBuffer);
     };
 
     //***************************************************************************
     //***************************************************************************
     //***************************************************************************
 
-    class Data3Msg  : public Ris::ByteMsgB
+    class Data3Msg : public BaseMsg
     {
     public:
 
         //***********************************************************************
-        // Members
+        // Members:
 
         int    mCode1;
         int    mCode2;
@@ -139,22 +139,22 @@ namespace MassiveMsg
         int    mCode5 [4];
 
         //***********************************************************************
-        // Constructor
+        // Methods:
 
         Data3Msg();
-
+        void copyToFrom (Ris::ByteBuffer* aBuffer);
     };
 
     //***************************************************************************
     //***************************************************************************
     //***************************************************************************
 
-    class Data4Msg  : public Ris::ByteMsgB
+    class Data4Msg : public BaseMsg
     {
     public:
 
         //***********************************************************************
-        // Members
+        // Members:
 
         int        mCode1;
         int        mCode2;
@@ -164,41 +164,24 @@ namespace MassiveMsg
         Data1Msg   mData1 [4];
 
         //***********************************************************************
-        // Constructor
+        // Methods:
 
         Data4Msg();
-
+        void copyToFrom (Ris::ByteBuffer* aBuffer);
     };
 
     //***************************************************************************
     //***************************************************************************
     //***************************************************************************
-    // Message Creator
+    // Message Creator:
 
-    class MsgBCopier : public Ris::BaseMsgBCopier
+    class MsgCreator : public Ris::BaseMsgCreator
     {
     public:
-
         //***********************************************************************
-        // Create
+        // Create a new message, based on a message type.
 
-        Ris::ByteMsgB* createMessage(int aMsgType);
-
-        //***********************************************************************
-        // Copy
-
-        void copyToFrom (Ris::ByteBuffer* aBuffer, Ris::ByteMsgB* aMsg);
-
-        //***********************************************************************
-        // Copy
-
-        void copyToFrom (Ris::ByteBuffer* aBuffer, TestMsg*   aMsg);
-        void copyToFrom (Ris::ByteBuffer* aBuffer, StatusMsg* aMsg);
-        void copyToFrom (Ris::ByteBuffer* aBuffer, Data1Msg*  aMsg);
-        void copyToFrom (Ris::ByteBuffer* aBuffer, Data2Msg*  aMsg);
-        void copyToFrom (Ris::ByteBuffer* aBuffer, Data3Msg*  aMsg);
-        void copyToFrom (Ris::ByteBuffer* aBuffer, Data4Msg*  aMsg);
-
+        Ris::ByteContent* createMsg (int aMessageType) override;
     };
 
 }

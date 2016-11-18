@@ -10,9 +10,9 @@ namespace MassiveMsg
    //****************************************************************************
    // Message Creator
 
-   Ris::ByteMsgB* MsgBCopier::createMessage(int aMessageType)
+   BaseMsg* MessageCreator::createMessage(int aMessageType)
    {
-      Ris::ByteMsgB* tMsg = 0;
+      BaseMsg* tMsg = 0;
 
       switch (aMessageType)
       {
@@ -43,38 +43,6 @@ namespace MassiveMsg
    //****************************************************************************
    //****************************************************************************
    //****************************************************************************
-   // Message Copy
-
-   void MsgBCopier::copyToFrom( Ris::ByteBuffer* aBuffer, Ris::ByteMsgB* aMsg)
-   {
-      switch (aMsg->mMessageType)
-      {
-         case MsgIdT::cTestMsg :
-               copyToFrom(aBuffer, (TestMsg*)aMsg);
-            break;
-         case MsgIdT::cStatusMsg :
-               copyToFrom(aBuffer, (StatusMsg*)aMsg);
-            break;
-         case MsgIdT::cData1Msg :
-               copyToFrom(aBuffer, (Data1Msg*)aMsg);
-            break;
-         case MsgIdT::cData2Msg :
-               copyToFrom(aBuffer, (Data2Msg*)aMsg);
-            break;
-         case MsgIdT::cData3Msg :
-               copyToFrom(aBuffer, (Data3Msg*)aMsg);
-            break;
-         case MsgIdT::cData4Msg :
-               copyToFrom(aBuffer, (Data4Msg*)aMsg);
-            break;
-         default :
-            break;
-      }
-   }
-
-   //****************************************************************************
-   //****************************************************************************
-   //****************************************************************************
    // TestMsg
 
    TestMsg::TestMsg()
@@ -87,12 +55,16 @@ namespace MassiveMsg
       mCode4 = 0;
    }
 
-   void MsgBCopier::copyToFrom (Ris::ByteBuffer* aBuffer, TestMsg* aMsg)
+   void TestMsg::copyToFrom (Ris::ByteBuffer* aBuffer)
    {
-      aBuffer->copy ( &aMsg->mCode1 );
-      aBuffer->copy ( &aMsg->mCode2 );
-      aBuffer->copy ( &aMsg->mCode3 );
-      aBuffer->copy ( &aMsg->mCode4 );
+      mHeader.headerCopyToFrom(aBuffer,this);
+
+      aBuffer->copy ( &mCode1 );
+      aBuffer->copy ( &mCode2 );
+      aBuffer->copy ( &mCode3 );
+      aBuffer->copy ( &mCode4 );
+
+      mHeader.headerReCopyToFrom(aBuffer,this);
    }
 
    //****************************************************************************
@@ -110,12 +82,16 @@ namespace MassiveMsg
       mCode4 = 0;
    }
 
-   void MsgBCopier::copyToFrom (Ris::ByteBuffer* aBuffer, StatusMsg* aMsg)
+   void StatusMsg::copyToFrom (Ris::ByteBuffer* aBuffer)
    {
-      aBuffer->copy ( &aMsg->mCode1 );
-      aBuffer->copy ( &aMsg->mCode2 );
-      aBuffer->copy ( &aMsg->mCode3 );
-      aBuffer->copy ( &aMsg->mCode4 );
+      mHeader.headerCopyToFrom(aBuffer,this);
+
+      aBuffer->copy ( &mCode1 );
+      aBuffer->copy ( &mCode2 );
+      aBuffer->copy ( &mCode3 );
+      aBuffer->copy ( &mCode4 );
+
+      mHeader.headerReCopyToFrom(aBuffer,this);
    }
 
    //****************************************************************************
@@ -133,12 +109,16 @@ namespace MassiveMsg
       mCode4 = 0;
    }
 
-   void MsgBCopier::copyToFrom (Ris::ByteBuffer* aBuffer, Data1Msg* aMsg)
+   void Data1Msg::copyToFrom (Ris::ByteBuffer* aBuffer)
    {
-      aBuffer->copy ( &aMsg->mCode1 );
-      aBuffer->copy ( &aMsg->mCode2 );
-      aBuffer->copy ( &aMsg->mCode3 );
-      aBuffer->copy ( &aMsg->mCode4 );
+      mHeader.headerCopyToFrom(aBuffer,this);
+
+      aBuffer->copy ( &mCode1 );
+      aBuffer->copy ( &mCode2 );
+      aBuffer->copy ( &mCode3 );
+      aBuffer->copy ( &mCode4 );
+
+      mHeader.headerReCopyToFrom(aBuffer,this);
    }
 
    //****************************************************************************
@@ -156,13 +136,17 @@ namespace MassiveMsg
       mCode4 = 0;
    }
 
-   void MsgBCopier::copyToFrom (Ris::ByteBuffer* aBuffer, Data2Msg* aMsg)
+   void Data2Msg::copyToFrom (Ris::ByteBuffer* aBuffer)
    {
-      aBuffer->copy ( &aMsg->mCode1 );
-      aBuffer->copy ( &aMsg->mCode2 );
-      aBuffer->copy ( &aMsg->mCode3 );
-      aBuffer->copy ( &aMsg->mCode4 );
-      MsgBCopier::copyToFrom (aBuffer, &aMsg->mData1 );
+      mHeader.headerCopyToFrom(aBuffer,this);
+
+      aBuffer->copy ( &mCode1 );
+      aBuffer->copy ( &mCode2 );
+      aBuffer->copy ( &mCode3 );
+      aBuffer->copy ( &mCode4 );
+      aBuffer->copy ( &mData1 );
+
+      mHeader.headerReCopyToFrom(aBuffer,this);
    }
 
    //****************************************************************************
@@ -182,20 +166,23 @@ namespace MassiveMsg
       mCode5Loop = 4;
    }
 
-   void MsgBCopier::copyToFrom (Ris::ByteBuffer* aBuffer, Data3Msg* aMsg)
+   void Data3Msg::copyToFrom (Ris::ByteBuffer* aBuffer)
    {
-      aBuffer->copy ( &aMsg->mCode1     );
-      aBuffer->copy ( &aMsg->mCode2     );
-      aBuffer->copy ( &aMsg->mCode3     );
-      aBuffer->copy ( &aMsg->mCode4     );
-      aBuffer->copyS(  aMsg->mString1   );
+      mHeader.headerCopyToFrom(aBuffer,this);
 
-      aBuffer->copy ( &aMsg->mCode5Loop );
-      for (int i=0;  i<aMsg->mCode5Loop; i++)
+      aBuffer->copy ( &mCode1     );
+      aBuffer->copy ( &mCode2     );
+      aBuffer->copy ( &mCode3     );
+      aBuffer->copy ( &mCode4     );
+      aBuffer->copyS(  mString1   );
+
+      aBuffer->copy ( &mCode5Loop );
+      for (int i=0;  i<mCode5Loop; i++)
       {
-      aBuffer->copy ( &aMsg->mCode5[i]  );
+      aBuffer->copy ( &mCode5[i]  );
       }
 
+      mHeader.headerReCopyToFrom(aBuffer,this);
    }
 
    //****************************************************************************
@@ -214,19 +201,22 @@ namespace MassiveMsg
       mData1Loop = 4;
    }
 
-   void MsgBCopier::copyToFrom (Ris::ByteBuffer* aBuffer, Data4Msg* aMsg)
+   void Data4Msg::copyToFrom (Ris::ByteBuffer* aBuffer)
    {
-      aBuffer->copy ( &aMsg->mCode1     );
-      aBuffer->copy ( &aMsg->mCode2     );
-      aBuffer->copy ( &aMsg->mCode3     );
-      aBuffer->copy ( &aMsg->mCode4     );
+      mHeader.headerCopyToFrom(aBuffer,this);
 
-      aBuffer->copy ( &aMsg->mData1Loop );
-      for (int i=0;  i<aMsg->mData1Loop; i++)
+      aBuffer->copy ( &mCode1     );
+      aBuffer->copy ( &mCode2     );
+      aBuffer->copy ( &mCode3     );
+      aBuffer->copy ( &mCode4     );
+
+      aBuffer->copy ( &mData1Loop );
+      for (int i=0;  i<mData1Loop; i++)
       {
-      MsgBCopier::copyToFrom (aBuffer, &aMsg->mData1[i]);
+      aBuffer->copy ( &mData1[i]  );
       }
 
+      mHeader.headerReCopyToFrom(aBuffer,this);
    }
 
 }

@@ -5,9 +5,9 @@ using      System.IO
 using      Ris
 
 define_ch   _MASSIVEMSG_H_
-include_ch  risByteBuffer.h
-include_ch  risByteMsgB.h
-include_ch  risByteMsgBCopier.h
+include_ch risByteContent.h
+include_ch risByteMsgMonkey.h
+include_ch massiveMsgBase.h
 include_cp  <stdio.h>
 include_cp  <string.h>
 include_cp  massiveMsg.h
