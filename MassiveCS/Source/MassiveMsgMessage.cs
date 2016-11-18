@@ -94,11 +94,20 @@ namespace MassiveMsg
         //**********************************************************************
         // Members:
 
-        public int        mCode1;
-        public int        mCode2;
-        public int        mCode3;
-        public int        mCode4;
-        public DataRecord mDataRecord;
+        public byte               mUChar;
+        public ushort             mUShort;
+        public uint               mUInt;
+        public ulong              mUInt64;
+        public sbyte              mChar;
+        public short              mShort;
+        public int                mInt;
+        public long               mInt64;
+        public float              mFloat;
+        public double             mDouble;
+        public bool               mBool;
+        public string             mString1;
+        public string             mString2;
+        public DataRecord         mDataRecord;
 
     };
 

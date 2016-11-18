@@ -150,11 +150,20 @@ public:
     //**************************************************************************
     // Members:
 
-    int        mCode1;
-    int        mCode2;
-    int        mCode3;
-    int        mCode4;
-    DataRecord mDataRecord;
+    unsigned char      mUChar;
+    unsigned short     mUShort;
+    unsigned int       mUInt;
+    unsigned long long mUInt64;
+    char               mChar;
+    short              mShort;
+    int                mInt;
+    long long          mInt64;
+    float              mFloat;
+    double             mDouble;
+    bool               mBool;
+    char               mString1 [100];
+    char               mString2 [100];
+    DataRecord         mDataRecord;
 
     //**************************************************************************
     // Methods:

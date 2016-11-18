@@ -144,20 +144,38 @@ DataMag::DataMag()
 {
    mMessageType = MsgIdT::cDataMag;
 
-   mCode1      = 0;
-   mCode2      = 0;
-   mCode3      = 0;
-   mCode4      = 0;
+   mUChar      = 0;
+   mUShort     = 0;
+   mUInt       = 0;
+   mUInt64     = 0;
+   mChar       = 0;
+   mShort      = 0;
+   mInt        = 0;
+   mInt64      = 0;
+   mFloat      = 0.0f;
+   mDouble     = 0.0;
+   mBool       = false;
+   mString1[0]=0;
+   mString2[0]=0;
 }
 
 void DataMag::copyToFrom (Ris::ByteBuffer* aBuffer)
 {
    mHeader.headerCopyToFrom(aBuffer,this);
 
-   aBuffer->copy ( &mCode1      );
-   aBuffer->copy ( &mCode2      );
-   aBuffer->copy ( &mCode3      );
-   aBuffer->copy ( &mCode4      );
+   aBuffer->copy ( &mUChar      );
+   aBuffer->copy ( &mUShort     );
+   aBuffer->copy ( &mUInt       );
+   aBuffer->copy ( &mUInt64     );
+   aBuffer->copy ( &mChar       );
+   aBuffer->copy ( &mShort      );
+   aBuffer->copy ( &mInt        );
+   aBuffer->copy ( &mInt64      );
+   aBuffer->copy ( &mFloat      );
+   aBuffer->copy ( &mDouble     );
+   aBuffer->copy ( &mBool       );
+   aBuffer->copyS(  mString1    );
+   aBuffer->copyS(  mString2    );
    aBuffer->copy ( &mDataRecord );
 
    mHeader.headerReCopyToFrom(aBuffer,this);

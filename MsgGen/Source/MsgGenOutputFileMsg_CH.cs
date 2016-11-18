@@ -238,11 +238,11 @@ namespace MsgGen
                 }
                 else if (!tMember.mIsArray)
                 {
-                    mWCH.WriteLine(1, "{0} {1};", stringExtend(tMember.mTypeName, aBlock.mTypeMaxSize), tMember.mName);
+                    mWCH.WriteLine(1, "{0} {1};", stringExtend(tMember.mTypeNameCP, aBlock.mTypeMaxSize), tMember.mName);
                 }
                 else
                 {
-                    mWCH.WriteLine(1, "{0} {1} [{2}];", stringExtend(tMember.mTypeName, aBlock.mTypeMaxSize), tMember.mName, tMember.mArraySize);
+                    mWCH.WriteLine(1, "{0} {1} [{2}];", stringExtend(tMember.mTypeNameCP, aBlock.mTypeMaxSize), tMember.mName, tMember.mArraySize);
                 }
 
             });

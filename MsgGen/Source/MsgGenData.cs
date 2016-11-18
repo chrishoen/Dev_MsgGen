@@ -17,22 +17,20 @@ namespace MsgGen
 
         public const int cBlockT_Message =  1;
         public const int cBlockT_Record  =  2;
-
-        public const int cMemberT_Byte    =  1;
-        public const int cMemberT_SByte   =  2;
-        public const int cMemberT_Int16   =  3;
-        public const int cMemberT_UInt16  =  4;
-        public const int cMemberT_Int32   =  5;
-        public const int cMemberT_UInt32  =  6;
-        public const int cMemberT_Int64   =  7;
-        public const int cMemberT_UInt64  =  8;
+      
+        public const int cMemberT_UChar   =  1;
+        public const int cMemberT_UInt16  =  2;
+        public const int cMemberT_UInt32  =  3;
+        public const int cMemberT_UInt64  =  4;
+        public const int cMemberT_Char    =  5;
+        public const int cMemberT_Int16   =  6;
+        public const int cMemberT_Int32   =  7;
+        public const int cMemberT_Int64   =  8;
         public const int cMemberT_Bool    =  9;
         public const int cMemberT_Float   = 10;
         public const int cMemberT_Double  = 11;
         public const int cMemberT_String  = 12;
         public const int cMemberT_Record  = 13;
-
-
     };
 
     //**************************************************************************
@@ -76,7 +74,8 @@ namespace MsgGen
 
         public int          mMemberType;
         public String       mName;
-        public String       mTypeName;
+        public String       mTypeNameCP;
+        public String       mTypeNameCS;
         public String       mInitialValue;
 
         public String       mArraySize;
@@ -89,81 +88,93 @@ namespace MsgGen
 
             switch (aVarType)
             {
-                case Defs.cMemberT_Byte:
+                case Defs.cMemberT_UChar:
                     {
-                        mTypeName = "byte";
-                        mInitialValue = "0";
-                    }
-                    break;
-                case Defs.cMemberT_SByte:
-                    {
-                        mTypeName = "sbyte";
-                        mInitialValue = "0";
-                    }
-                    break;
-                case Defs.cMemberT_Int16:
-                    {
-                        mTypeName = "short";
+                        mTypeNameCP = "unsigned char";
+                        mTypeNameCS = "byte";
                         mInitialValue = "0";
                     }
                     break;
                 case Defs.cMemberT_UInt16:
                     {
-                        mTypeName = "ushort";
-                        mInitialValue = "0";
-                    }
-                    break;
-                case Defs.cMemberT_Int32:
-                    {
-                        mTypeName = "int";
+                        mTypeNameCP = "unsigned short";
+                        mTypeNameCS = "ushort";
                         mInitialValue = "0";
                     }
                     break;
                 case Defs.cMemberT_UInt32:
                     {
-                        mTypeName = "uint";
-                        mInitialValue = "0";
-                    }
-                    break;
-                case Defs.cMemberT_Int64:
-                    {
-                        mTypeName = "long";
+                        mTypeNameCP = "unsigned int";
+                        mTypeNameCS = "uint";
                         mInitialValue = "0";
                     }
                     break;
                 case Defs.cMemberT_UInt64:
                     {
-                        mTypeName = "ulong";
+                        mTypeNameCP = "unsigned long long";
+                        mTypeNameCS = "ulong";
+                        mInitialValue = "0";
+                    }
+                    break;
+                case Defs.cMemberT_Char:
+                    {
+                        mTypeNameCP = "char";
+                        mTypeNameCS = "sbyte";
+                        mInitialValue = "0";
+                    }
+                    break;
+                case Defs.cMemberT_Int16:
+                    {
+                        mTypeNameCP = "short";
+                        mTypeNameCS = "short";
+                        mInitialValue = "0";
+                    }
+                    break;
+                case Defs.cMemberT_Int32:
+                    {
+                        mTypeNameCP = "int";
+                        mTypeNameCS = "int";
+                        mInitialValue = "0";
+                    }
+                    break;
+                case Defs.cMemberT_Int64:
+                    {
+                        mTypeNameCP = "long long";
+                        mTypeNameCS = "long";
                         mInitialValue = "0";
                     }
                     break;
                 case Defs.cMemberT_Bool:
                     {
-                        mTypeName = "bool";
+                        mTypeNameCP = "bool";
+                        mTypeNameCS = "bool";
                         mInitialValue = "false";
                     }
                     break;
                 case Defs.cMemberT_Float:
                     {
-                        mTypeName = "float";
+                        mTypeNameCP = "float";
+                        mTypeNameCS = "float";
                         mInitialValue = "0.0f";
                     }
                     break;
                 case Defs.cMemberT_Double:
                     {
-                        mTypeName = "double";
+                        mTypeNameCP = "double";
+                        mTypeNameCS = "double";
                         mInitialValue = "0.0";
                     }
                     break;
                 case Defs.cMemberT_String:
                     {
-                        mTypeName = "string";
+                        mTypeNameCP = "string";
+                        mTypeNameCS = "string";
                         mInitialValue = "String.Empty";
                     }
                     break;
                 case Defs.cMemberT_Record:
                     {
-                        mTypeName = String.Empty;
+                        mTypeNameCP = String.Empty;
                         mInitialValue = String.Empty;
                     }
                     break;
@@ -192,10 +203,7 @@ namespace MsgGen
             mName = "name";
             mInitialValue = "initial";
         }
-
     };
-
-
 
     //**************************************************************************
     //**************************************************************************
@@ -256,21 +264,19 @@ namespace MsgGen
 
             if (aMember.mIsArray == false)
             {
-                if (aMember.mTypeName.Length > mTypeMaxSize)
+                if (aMember.mTypeNameCP.Length > mTypeMaxSize)
                 {
-                    mTypeMaxSize = aMember.mTypeName.Length;
+                    mTypeMaxSize = aMember.mTypeNameCP.Length;
                 }
             }
             else
             {
-                if (aMember.mTypeName.Length + 2> mTypeMaxSize)
+                if (aMember.mTypeNameCP.Length + 2> mTypeMaxSize)
                 {
-                    mTypeMaxSize = aMember.mTypeName.Length + 2;
+                    mTypeMaxSize = aMember.mTypeNameCP.Length + 2;
                 }
             }
-
         }
-
     };
 
     //**************************************************************************

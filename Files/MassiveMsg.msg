@@ -66,9 +66,18 @@ record  DataRecord
 
 message DataMag
 {
-   int          mCode1
-   int          mCode2
-   int          mCode3
-   int          mCode4
+   uchar        mUChar
+   ushort       mUShort
+   uint         mUInt
+   uint64       mUInt64
+   char         mChar
+   short        mShort
+   int          mInt
+   int64        mInt64
+   float        mFloat
+   double       mDouble
+   bool         mBool
+   string       mString1 [100]
+   string       mString2 [100]
    DataRecord   mDataRecord
 }

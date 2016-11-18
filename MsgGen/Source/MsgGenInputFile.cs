@@ -51,18 +51,17 @@ namespace MsgGen
 
             if (aCmd.isCmd("const"))        processConst      (aCmd);
 
-            if (aCmd.isCmd("byte"))         processMember     (Defs.cMemberT_Byte,aCmd);
-            if (aCmd.isCmd("sbyte"))        processMember     (Defs.cMemberT_SByte,aCmd);
-            if (aCmd.isCmd("short"))        processMember     (Defs.cMemberT_Int16,aCmd);
+            if (aCmd.isCmd("uchar"))        processMember     (Defs.cMemberT_UChar,aCmd);
             if (aCmd.isCmd("ushort"))       processMember     (Defs.cMemberT_UInt16,aCmd);
-            if (aCmd.isCmd("int"))          processMember     (Defs.cMemberT_Int32,aCmd);
             if (aCmd.isCmd("uint"))         processMember     (Defs.cMemberT_UInt32,aCmd);
-            if (aCmd.isCmd("int64"))        processMember     (Defs.cMemberT_Int64,aCmd);
             if (aCmd.isCmd("uint64"))       processMember     (Defs.cMemberT_UInt64,aCmd);
+            if (aCmd.isCmd("char"))         processMember     (Defs.cMemberT_Char,aCmd);
+            if (aCmd.isCmd("short"))        processMember     (Defs.cMemberT_Int16,aCmd);
+            if (aCmd.isCmd("int"))          processMember     (Defs.cMemberT_Int32,aCmd);
+            if (aCmd.isCmd("int64"))        processMember     (Defs.cMemberT_Int64,aCmd);
             if (aCmd.isCmd("bool"))         processMember     (Defs.cMemberT_Bool,aCmd);
             if (aCmd.isCmd("float"))        processMember     (Defs.cMemberT_Float,aCmd);
             if (aCmd.isCmd("double"))       processMember     (Defs.cMemberT_Double,aCmd);
-
             if (aCmd.isCmd("string"))       processString     (aCmd);
 
             if (aCmd.isBadCmd() && mBlockValid)
@@ -295,7 +294,8 @@ namespace MsgGen
 
             MemberData tMember = new MemberData(Defs.cMemberT_Record);
 
-            tMember.mTypeName = aCmd.argString(0);
+            tMember.mTypeNameCP = aCmd.argString(0);
+            tMember.mTypeNameCS = aCmd.argString(0);
             tMember.mName = aCmd.argString(1);
 
             mBlockData.addMember(tMember);
@@ -320,7 +320,8 @@ namespace MsgGen
 
             //******************************************************************
             MemberData tMember2 = new MemberData(Defs.cMemberT_Record);
-            tMember2.mTypeName = aCmd.argString(0);
+            tMember2.mTypeNameCP = aCmd.argString(0);
+            tMember2.mTypeNameCS = aCmd.argString(0);
             tMember2.mName = aCmd.argString(1);
 
             tMember2.mName = aCmd.argString(1);

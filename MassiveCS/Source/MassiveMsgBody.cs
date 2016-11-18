@@ -240,10 +240,19 @@ namespace MassiveMsg
         public DataMag()
         {
             mMessageType = MsgIdT.cDataMag;
-            mCode1      = 0;
-            mCode2      = 0;
-            mCode3      = 0;
-            mCode4      = 0;
+            mUChar      = 0;
+            mUShort     = 0;
+            mUInt       = 0;
+            mUInt64     = 0;
+            mChar       = 0;
+            mShort      = 0;
+            mInt        = 0;
+            mInt64      = 0;
+            mFloat      = 0.0f;
+            mDouble     = 0.0;
+            mBool       = false;
+            mString1    = String.Empty;
+            mString2    = String.Empty;
             mDataRecord = new DataRecord();
         }
 
@@ -254,10 +263,19 @@ namespace MassiveMsg
         {
             mHeader.headerCopyToFrom(aBuffer,this);
 
-            aBuffer.copy ( ref mCode1 );
-            aBuffer.copy ( ref mCode2 );
-            aBuffer.copy ( ref mCode3 );
-            aBuffer.copy ( ref mCode4 );
+            aBuffer.copy ( ref mUChar );
+            aBuffer.copy ( ref mUShort );
+            aBuffer.copy ( ref mUInt );
+            aBuffer.copy ( ref mUInt64 );
+            aBuffer.copy ( ref mChar );
+            aBuffer.copy ( ref mShort );
+            aBuffer.copy ( ref mInt );
+            aBuffer.copy ( ref mInt64 );
+            aBuffer.copy ( ref mFloat );
+            aBuffer.copy ( ref mDouble );
+            aBuffer.copy ( ref mBool );
+            aBuffer.copyS( ref mString1 );
+            aBuffer.copyS( ref mString2 );
             aBuffer.copy (     mDataRecord );
 
             mHeader.headerReCopyToFrom(aBuffer,this);

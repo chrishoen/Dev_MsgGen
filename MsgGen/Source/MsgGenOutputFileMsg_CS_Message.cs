@@ -169,11 +169,11 @@ namespace MsgGen
             {
                 if (!tMember.mIsArray)
                 {
-                    mWCS.WriteLine (2, "public {0} {1};", stringExtend(tMember.mTypeName,aBlock.mTypeMaxSize), tMember.mName);
+                    mWCS.WriteLine (2, "public {0} {1};", stringExtend(tMember.mTypeNameCS,aBlock.mTypeMaxSize), tMember.mName);
                 }
                 else
                 {
-                    mWCS.WriteLine (2, "public {0} {1};", stringExtend(tMember.mTypeName + "[]",aBlock.mTypeMaxSize), tMember.mName);
+                    mWCS.WriteLine (2, "public {0} {1};", stringExtend(tMember.mTypeNameCS + "[]",aBlock.mTypeMaxSize), tMember.mName);
                 }
 
             });

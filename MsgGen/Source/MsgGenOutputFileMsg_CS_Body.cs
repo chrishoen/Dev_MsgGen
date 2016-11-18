@@ -253,22 +253,22 @@ namespace MsgGen
                     }
                     else
                     {
-                        mWCS.WriteLine (3, "{0} = new {1}();", stringExtend(tMember.mName,aBlock.mNameMaxSize), tMember.mTypeName);
+                        mWCS.WriteLine (3, "{0} = new {1}();", stringExtend(tMember.mName,aBlock.mNameMaxSize), tMember.mTypeNameCS);
                     }
                  }
                 else
                 {
                     if (tMember.mMemberType != Defs.cMemberT_Record)
                     {
-                        mWCS.WriteLine (3, "{0} = new {1}[{2}];", stringExtend(tMember.mName,aBlock.mNameMaxSize), tMember.mTypeName,tMember.mArraySize);
+                        mWCS.WriteLine (3, "{0} = new {1}[{2}];", stringExtend(tMember.mName,aBlock.mNameMaxSize), tMember.mTypeNameCS,tMember.mArraySize);
                         mWCS.WriteSkip ();
                     }
                     else
                     {
-                        mWCS.WriteLine (3, "{0} = new {1}[{2}];", stringExtend(tMember.mName,aBlock.mNameMaxSize), tMember.mTypeName,tMember.mArraySize);
+                        mWCS.WriteLine (3, "{0} = new {1}[{2}];", stringExtend(tMember.mName,aBlock.mNameMaxSize), tMember.mTypeNameCS,tMember.mArraySize);
                         mWCS.WriteLine (3, "for (int i=0; i<{0}; i++)",tMember.mArraySize);
                         mWCS.WriteLine (3, "{");
-                        mWCS.WriteLine (3, "{0} = new {1}();",stringExtend(tMember.mName+"[i]",aBlock.mNameMaxSize),tMember.mTypeName);
+                        mWCS.WriteLine (3, "{0} = new {1}();",stringExtend(tMember.mName+"[i]",aBlock.mNameMaxSize),tMember.mTypeNameCS);
                         mWCS.WriteLine (3, "}");
                         if (tLastMember == false)
                         {
