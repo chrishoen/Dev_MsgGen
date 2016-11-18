@@ -73,13 +73,13 @@ namespace MsgGen
             mFileData = aFileData;
 
             writeFileBegin();
-            writeMessageCreator();
 
             mFileData.mBlockList.ForEach(delegate(BlockData tBlock)
             {
                 writeBlock(tBlock);
             });
 
+            writeMessageCreator();
             writeFileEnd();
         }
 
@@ -137,32 +137,32 @@ namespace MsgGen
 
         public void writeMessageCreator()
         {
-            mWCP.WriteBar  (1,3);
-            mWCP.WriteLine (1, "// Message Creator");
+            mWCP.WriteBar  (0,3);
+            mWCP.WriteLine (0, "// Create a new message, based on a message type.");
             mWCP.WriteSkip ();
-            mWCP.WriteLine (1, "BaseMsg* MessageCreator::createMessage(int aMessageType)");
+            mWCP.WriteLine (0, "Ris::ByteContent* MsgCreator::createMsg (int aMessageType)");
+            mWCP.WriteLine (0, "{");
+            mWCP.WriteLine (1, "BaseMsg* tMsg = 0;");
+            mWCP.WriteSkip ();
+            mWCP.WriteLine (1, "switch (aMessageType)");
             mWCP.WriteLine (1, "{");
-            mWCP.WriteLine (2, "BaseMsg* tMsg = 0;");
-            mWCP.WriteSkip ();
-            mWCP.WriteLine (2, "switch (aMessageType)");
-            mWCP.WriteLine (2, "{");
 
             mFileData.mBlockList.ForEach(delegate(BlockData tBlock)
             {
                 if (tBlock.mBlockType == Defs.cBlockT_Message)
                 {
-                    mWCP.WriteLine (3, "case MsgIdT::c{0} :", tBlock.mName);
-                    mWCP.WriteLine (4, "tMsg = new {0}();", tBlock.mName);
-                    mWCP.WriteLine (4, "break;");
+                    mWCP.WriteLine (2, "case MsgIdT::c{0} :", tBlock.mName);
+                    mWCP.WriteLine (3, "tMsg = new {0}();", tBlock.mName);
+                    mWCP.WriteLine (3, "break;");
                 }
             });
 
-            mWCP.WriteLine (3, "default :");
-            mWCP.WriteLine (4, "break;");
+            mWCP.WriteLine (2, "default :");
+            mWCP.WriteLine (3, "break;");
 
-            mWCP.WriteLine (2, "}");
-            mWCP.WriteLine (2, "return tMsg;");
             mWCP.WriteLine (1, "}");
+            mWCP.WriteLine (1, "return tMsg;");
+            mWCP.WriteLine (0, "}");
             mWCP.WriteSkip ();
         }
 
@@ -177,8 +177,8 @@ namespace MsgGen
             //******************************************************************
             // Class Begin
 
-            mWCP.WriteBar  (1,3);
-            mWCP.WriteLine (1, "// {0}", aBlock.mName);
+            mWCP.WriteBar  (0,3);
+            mWCP.WriteLine (0, "// {0}", aBlock.mName);
             mWCP.WriteSkip ();
 
             //******************************************************************
@@ -186,12 +186,12 @@ namespace MsgGen
             //******************************************************************
             // Constructor
 
-            mWCP.WriteLine (1, "{0}::{0}()",aBlock.mName);
-            mWCP.WriteLine (1, "{");
+            mWCP.WriteLine (0, "{0}::{0}()",aBlock.mName);
+            mWCP.WriteLine (0, "{");
 
             if (aBlock.mBlockType == Defs.cBlockT_Message)
             {
-                mWCP.WriteLine (2, "{0} = MsgIdT::c{1};",stringExtend("mMessageType",aBlock.mNameMaxSize), aBlock.mName);
+                mWCP.WriteLine (1, "{0} = MsgIdT::c{1};",stringExtend("mMessageType",aBlock.mNameMaxSize), aBlock.mName);
                 mWCP.WriteSkip ();
             }
 
@@ -206,16 +206,16 @@ namespace MsgGen
                 {
                     if (tMember.mMemberType == Defs.cMemberT_String)
                     {
-                        mWCP.WriteLine (2, "{0}[0]=0;", tMember.mName);
+                        mWCP.WriteLine (1, "{0}[0]=0;", tMember.mName);
                     }
                     else if (tMember.mMemberType != Defs.cMemberT_Record)
                     {
-                        mWCP.WriteLine (2, "{0} = {1};", stringExtend(tMember.mName,aBlock.mNameMaxSize), tMember.mInitialValue);
+                        mWCP.WriteLine (1, "{0} = {1};", stringExtend(tMember.mName,aBlock.mNameMaxSize), tMember.mInitialValue);
                     }
                  }
             });
 
-            mWCP.WriteLine (1, "}");
+            mWCP.WriteLine (0, "}");
             mWCP.WriteSkip ();
 
             //******************************************************************
@@ -223,12 +223,12 @@ namespace MsgGen
             //******************************************************************
             // Copy
 
-            mWCP.WriteLine (1, "void {0}::copyToFrom (Ris::ByteBuffer* aBuffer)",aBlock.mName);
-            mWCP.WriteLine (1, "{");
+            mWCP.WriteLine (0, "void {0}::copyToFrom (Ris::ByteBuffer* aBuffer)",aBlock.mName);
+            mWCP.WriteLine (0, "{");
 
             if (aBlock.mBlockType == Defs.cBlockT_Message)
             {
-                mWCP.WriteLine (2, "mHeader.headerCopyToFrom(aBuffer,this);");
+                mWCP.WriteLine (1, "mHeader.headerCopyToFrom(aBuffer,this);");
                 mWCP.WriteSkip ();
             }
 
@@ -242,34 +242,34 @@ namespace MsgGen
                     }
                     if (tMember.mMemberType == Defs.cMemberT_String)
                     {
-                        mWCP.WriteLine (2, "aBuffer->copyS(  {0} );", stringExtend(tMember.mName,aBlock.mNameMaxSize));
+                        mWCP.WriteLine (1, "aBuffer->copyS(  {0} );", stringExtend(tMember.mName,aBlock.mNameMaxSize));
                     }
                     else if (tMember.mMemberType == Defs.cMemberT_Record)
                     {
-                        mWCP.WriteLine (2, "aBuffer->copy ( &{0} );", stringExtend(tMember.mName,aBlock.mNameMaxSize));
+                        mWCP.WriteLine (1, "aBuffer->copy ( &{0} );", stringExtend(tMember.mName,aBlock.mNameMaxSize));
                     }
                     else
                     {
-                        mWCP.WriteLine (2, "aBuffer->copy ( &{0} );", stringExtend(tMember.mName,aBlock.mNameMaxSize));
+                        mWCP.WriteLine (1, "aBuffer->copy ( &{0} );", stringExtend(tMember.mName,aBlock.mNameMaxSize));
                     }
                 }
                 else
                 {
-                    mWCP.WriteLine (2, "for (int i=0;  i<{0}Loop; i++)", tMember.mName);
-                    mWCP.WriteLine (2, "{");
+                    mWCP.WriteLine (1, "for (int i=0;  i<{0}Loop; i++)", tMember.mName);
+                    mWCP.WriteLine (1, "{");
                     if (tMember.mMemberType == Defs.cMemberT_String)
                     {
-                        mWCP.WriteLine(2, "aBuffer->copyS(  {0} );", stringExtend(tMember.mName + "[i]",aBlock.mNameMaxSize));
+                        mWCP.WriteLine(1, "aBuffer->copyS(  {0} );", stringExtend(tMember.mName + "[i]",aBlock.mNameMaxSize));
                     }
                     else if (tMember.mMemberType == Defs.cMemberT_Record)
                     {
-                        mWCP.WriteLine(2, "aBuffer->copy ( &{0} );", stringExtend(tMember.mName + "[i]",aBlock.mNameMaxSize));
+                        mWCP.WriteLine(1, "aBuffer->copy ( &{0} );", stringExtend(tMember.mName + "[i]",aBlock.mNameMaxSize));
                     }
                     else
                     {
-                        mWCP.WriteLine(2, "aBuffer->copy ( &{0} );", stringExtend(tMember.mName + "[i]",aBlock.mNameMaxSize));
+                        mWCP.WriteLine(1, "aBuffer->copy ( &{0} );", stringExtend(tMember.mName + "[i]",aBlock.mNameMaxSize));
                     }
-                    mWCP.WriteLine(2, "}");
+                    mWCP.WriteLine(1, "}");
                     mWCP.WriteSkip ();
                 }
 
@@ -282,9 +282,9 @@ namespace MsgGen
             if (aBlock.mBlockType == Defs.cBlockT_Message)
             {
                 mWCP.WriteSkip ();
-                mWCP.WriteLine(2, "mHeader.headerReCopyToFrom(aBuffer,this);");
+                mWCP.WriteLine(1, "mHeader.headerReCopyToFrom(aBuffer,this);");
             }
-            mWCP.WriteLine(1, "}");
+            mWCP.WriteLine(0, "}");
             mWCP.WriteSkip ();
         }
 

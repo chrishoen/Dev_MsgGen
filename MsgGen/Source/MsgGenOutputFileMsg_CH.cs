@@ -143,25 +143,25 @@ namespace MsgGen
 
         public void writeIdentifiers()
         {
-            mWCH.WriteBar  (1,3);
-            mWCH.WriteLine (1, "// Message Types");
+            mWCH.WriteBar  (0,3);
+            mWCH.WriteLine (0, "// Message Types");
             mWCH.WriteSkip ();
-            mWCH.WriteLine (1, "class MsgIdT");
-            mWCH.WriteLine (1, "{");
-            mWCH.WriteLine (1, "public:");
+            mWCH.WriteLine (0, "class MsgIdT");
+            mWCH.WriteLine (0, "{");
+            mWCH.WriteLine (0, "public:");
             mWCH.WriteSkip ();
-            mWCH.WriteLine (2, "static const int cUnspecified =   0;");
+            mWCH.WriteLine (1, "static const int cUnspecified =   0;");
 
             int ident=1;
             mFileData.mBlockList.ForEach(delegate(BlockData tBlock)
             {
                 if (tBlock.mBlockType == Defs.cBlockT_Message)
                 {
-                    mWCH.WriteLine (2, "static const int c{0} = {1,3};", stringExtend(tBlock.mName,mFileData.mNameMaxSize), ident++);
+                    mWCH.WriteLine (1, "static const int c{0} = {1,3};", stringExtend(tBlock.mName,mFileData.mNameMaxSize), ident++);
                 }
             });
 
-            mWCH.WriteLine (1, "{0}","};");
+            mWCH.WriteLine (0, "{0}","};");
             mWCH.WriteSkip ();
         }
 
@@ -171,17 +171,17 @@ namespace MsgGen
 
         public void writeMessageCreator()
         {
-            mWCH.WriteBar  (1,3);
-            mWCH.WriteLine (1, "// Message Creator:");
+            mWCH.WriteBar  (0,3);
+            mWCH.WriteLine (0, "// Message Creator:");
             mWCH.WriteSkip ();
-            mWCH.WriteLine (1, "class MsgCreator : public Ris::BaseMsgCreator");
-            mWCH.WriteLine (1, "{");
-            mWCH.WriteLine (1, "public:");
-            mWCH.WriteBar  (2,1);
-            mWCH.WriteLine (2, "// Create a new message, based on a message type.");
+            mWCH.WriteLine (0, "class MsgCreator : public Ris::BaseMsgCreator");
+            mWCH.WriteLine (0, "{");
+            mWCH.WriteLine (0, "public:");
+            mWCH.WriteBar  (1,1);
+            mWCH.WriteLine (1, "// Create a new message, based on a message type.");
             mWCH.WriteSkip ();
-            mWCH.WriteLine (2, "Ris::ByteContent* createMsg (int aMessageType) override;");
-            mWCH.WriteLine (1, "};");
+            mWCH.WriteLine (1, "Ris::ByteContent* createMsg (int aMessageType) override;");
+            mWCH.WriteLine (0, "};");
             mWCH.WriteSkip ();
         }
 
@@ -196,20 +196,20 @@ namespace MsgGen
             //******************************************************************
             // Class Begin
 
-            mWCH.WriteBar  (1,3);
+            mWCH.WriteBar  (0,3);
             mWCH.WriteSkip ();
 
             if (aBlock.mBlockType == Defs.cBlockT_Message)
             {
-               mWCH.WriteLine (1, "class {0} : public BaseMsg", aBlock.mName);
+               mWCH.WriteLine (0, "class {0} : public BaseMsg", aBlock.mName);
             }
             else
             {
-               mWCH.WriteLine (1, "class {0} : public Ris::ByteContent", aBlock.mName);
+               mWCH.WriteLine (0, "class {0} : public Ris::ByteContent", aBlock.mName);
             }
 
-            mWCH.WriteLine (1, "{");
-            mWCH.WriteLine (1, "public:");
+            mWCH.WriteLine (0, "{");
+            mWCH.WriteLine (0, "public:");
             mWCH.WriteSkip ();
 
             //******************************************************************
@@ -217,15 +217,15 @@ namespace MsgGen
             //******************************************************************
             // Members
 
-            mWCH.WriteBar  (2,1);
-            mWCH.WriteLine (2,"// Members:");
+            mWCH.WriteBar  (1,1);
+            mWCH.WriteLine (1,"// Members:");
             mWCH.WriteSkip ();
 
             if (aBlock.mConstList.Count > 0)
             {
                 aBlock.mConstList.ForEach(delegate (ConstData tConst)
                 {
-                    mWCH.WriteLine(2, "static const int {0} = {1};", stringExtend(tConst.mName, aBlock.mConstMaxSize), tConst.mInitialValue);
+                    mWCH.WriteLine(1, "static const int {0} = {1};", stringExtend(tConst.mName, aBlock.mConstMaxSize), tConst.mInitialValue);
                 });
                 mWCH.WriteSkip();
             }
@@ -234,15 +234,15 @@ namespace MsgGen
             {
                 if (tMember.mMemberType == Defs.cMemberT_String)
                 {
-                    mWCH.WriteLine(2, "{0} {1} [{2}];", stringExtend("char", aBlock.mTypeMaxSize), tMember.mName, tMember.mArraySize);
+                    mWCH.WriteLine(1, "{0} {1} [{2}];", stringExtend("char", aBlock.mTypeMaxSize), tMember.mName, tMember.mArraySize);
                 }
                 else if (!tMember.mIsArray)
                 {
-                    mWCH.WriteLine(2, "{0} {1};", stringExtend(tMember.mTypeName, aBlock.mTypeMaxSize), tMember.mName);
+                    mWCH.WriteLine(1, "{0} {1};", stringExtend(tMember.mTypeName, aBlock.mTypeMaxSize), tMember.mName);
                 }
                 else
                 {
-                    mWCH.WriteLine(2, "{0} {1} [{2}];", stringExtend(tMember.mTypeName, aBlock.mTypeMaxSize), tMember.mName, tMember.mArraySize);
+                    mWCH.WriteLine(1, "{0} {1} [{2}];", stringExtend(tMember.mTypeName, aBlock.mTypeMaxSize), tMember.mName, tMember.mArraySize);
                 }
 
             });
@@ -253,19 +253,19 @@ namespace MsgGen
             //******************************************************************
             // Methods
 
-            mWCH.WriteBar  (2,1);
-            mWCH.WriteLine (2,"// Methods:");
+            mWCH.WriteBar  (1,1);
+            mWCH.WriteLine (1,"// Methods:");
             mWCH.WriteSkip ();
 
-            mWCH.WriteLine (2, "{0}();",aBlock.mName);
-            mWCH.WriteLine (2, "void copyToFrom (Ris::ByteBuffer* aBuffer);");
+            mWCH.WriteLine (1, "{0}();",aBlock.mName);
+            mWCH.WriteLine (1, "void copyToFrom (Ris::ByteBuffer* aBuffer);");
 
             //******************************************************************
             //******************************************************************
             //******************************************************************
             // Class End
 
-            mWCH.WriteLine(1, "};");
+            mWCH.WriteLine(0, "};");
             mWCH.WriteSkip ();
         }
 

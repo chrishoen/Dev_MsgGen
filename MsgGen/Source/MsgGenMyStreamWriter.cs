@@ -119,7 +119,7 @@ namespace MsgGen
             {
                 for (int j = 0; j < tSpace; j++) Write(" ");
                 Write("//");
-                for (int j = tSpace + 2; j < 81; j++) Write("*");
+                for (int j = tSpace + 2; j < 80; j++) Write("*");
                 WriteLine("");
             }
             mLastWasNotEmpty = true;
