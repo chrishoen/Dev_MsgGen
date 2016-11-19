@@ -8,11 +8,11 @@ namespace MassiveMsg
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
-// TestMsg
+// ExampleMsg
 
-TestMsg::TestMsg()
+ExampleMsg::ExampleMsg()
 {
-   mMessageType = MsgIdT::cTestMsg;
+   mMessageType = MsgIdT::cExampleMsg;
 
    mCode1     = 0;
    mCode2     = 0;
@@ -21,7 +21,7 @@ TestMsg::TestMsg()
    mCodeCode5 = 0;
 }
 
-void TestMsg::copyToFrom (Ris::ByteBuffer* aBuffer)
+void ExampleMsg::copyToFrom (Ris::ByteBuffer* aBuffer)
 {
    mHeader.headerCopyToFrom(aBuffer,this);
 
@@ -30,6 +30,33 @@ void TestMsg::copyToFrom (Ris::ByteBuffer* aBuffer)
    aBuffer->copy ( &mCode3     );
    aBuffer->copy ( &mCode4     );
    aBuffer->copy ( &mCodeCode5 );
+
+   mHeader.headerReCopyToFrom(aBuffer,this);
+}
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// TestMsg
+
+TestMsg::TestMsg()
+{
+   mMessageType = MsgIdT::cTestMsg;
+
+   mCode1 = 0;
+   mCode2 = 0;
+   mCode3 = 0;
+   mCode4 = 0;
+}
+
+void TestMsg::copyToFrom (Ris::ByteBuffer* aBuffer)
+{
+   mHeader.headerCopyToFrom(aBuffer,this);
+
+   aBuffer->copy ( &mCode1 );
+   aBuffer->copy ( &mCode2 );
+   aBuffer->copy ( &mCode3 );
+   aBuffer->copy ( &mCode4 );
 
    mHeader.headerReCopyToFrom(aBuffer,this);
 }
@@ -194,6 +221,9 @@ Ris::ByteContent* MsgCreator::createMsg (int aMessageType)
 
    switch (aMessageType)
    {
+      case MsgIdT::cExampleMsg :
+         tMsg = new ExampleMsg();
+         break;
       case MsgIdT::cTestMsg :
          tMsg = new TestMsg();
          break;

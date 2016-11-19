@@ -14,11 +14,12 @@ namespace MassiveMsg
     public class MsgIdT
     {
         public const int cUnspecified =   0;
-        public const int cTestMsg           =   1;
-        public const int cFirstMessageMsg   =   2;
-        public const int cStatusRequestMsg  =   3;
-        public const int cStatusResponseMsg =   4;
-        public const int cDataMag           =   5;
+        public const int cExampleMsg        =   1;
+        public const int cTestMsg           =   2;
+        public const int cFirstMessageMsg   =   3;
+        public const int cStatusRequestMsg  =   4;
+        public const int cStatusResponseMsg =   5;
+        public const int cDataMag           =   6;
     };
 
     //**************************************************************************
@@ -37,6 +38,9 @@ namespace MassiveMsg
 
             switch (aMessageType)
             {
+                case MsgIdT.cExampleMsg :
+                    tMsg = new ExampleMsg();
+                    break;
                 case MsgIdT.cTestMsg :
                     tMsg = new TestMsg();
                     break;
@@ -63,14 +67,14 @@ namespace MassiveMsg
     //**************************************************************************
     //**************************************************************************
 
-    public partial class TestMsg : BaseMsg
+    public partial class ExampleMsg : BaseMsg
     {
         //**********************************************************************
         // Constructor
 
-        public TestMsg()
+        public ExampleMsg()
         {
-            mMessageType = MsgIdT.cTestMsg;
+            mMessageType = MsgIdT.cExampleMsg;
             mCode1     = 0;
             mCode2     = 0;
             mCode3     = 0;
@@ -90,6 +94,40 @@ namespace MassiveMsg
             aBuffer.copy ( ref mCode3 );
             aBuffer.copy ( ref mCode4 );
             aBuffer.copy ( ref mCodeCode5 );
+
+            mHeader.headerReCopyToFrom(aBuffer,this);
+        }
+    };
+
+    //**************************************************************************
+    //**************************************************************************
+    //**************************************************************************
+
+    public partial class TestMsg : BaseMsg
+    {
+        //**********************************************************************
+        // Constructor
+
+        public TestMsg()
+        {
+            mMessageType = MsgIdT.cTestMsg;
+            mCode1 = 0;
+            mCode2 = 0;
+            mCode3 = 0;
+            mCode4 = 0;
+        }
+
+        //**********************************************************************
+        // Copy
+
+        public override void copyToFrom (ByteBuffer aBuffer)
+        {
+            mHeader.headerCopyToFrom(aBuffer,this);
+
+            aBuffer.copy ( ref mCode1 );
+            aBuffer.copy ( ref mCode2 );
+            aBuffer.copy ( ref mCode3 );
+            aBuffer.copy ( ref mCode4 );
 
             mHeader.headerReCopyToFrom(aBuffer,this);
         }

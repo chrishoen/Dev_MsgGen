@@ -227,8 +227,7 @@ namespace MsgGen
                 mWCH.WritePreCommentList  (1,tConst.mPreCommentList);
 
                 mWCH.Write(1, "static const int {0} = {1};",
-                    stringExtend(tConst.mName, 
-                    aBlock.mConstMaxSize), 
+                    stringExtend(tConst.mName,aBlock.mConstMaxSize), 
                     tConst.mInitialValue);
 
                 if (String.IsNullOrEmpty(tConst.mPostComment))
@@ -237,7 +236,7 @@ namespace MsgGen
                 }
                 else
                 {
-                    mWCH.WriteSpace(4 + aBlock.mNameMaxSize - tConst.mName.Length);
+                    mWCH.WriteSpace(4);
                     mWCH.Write("{0}",tConst.mPostComment);
                     mWCH.WriteEOL();
                 }
@@ -255,7 +254,7 @@ namespace MsgGen
                 if (tMember.mMemberType == Defs.cMemberT_String)
                 {
                     mWCH.Write(1, "{0} {1} [{2}];", 
-                        stringExtend("char", aBlock.mTypeMaxSize), 
+                        stringExtend("char", aBlock.mTypeMaxSize),
                         tMember.mName, 
                         tMember.mArraySize);
                 }

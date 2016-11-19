@@ -9,21 +9,42 @@ namespace MassiveMsg
     //**************************************************************************
     //**************************************************************************
     //**************************************************************************
-    // Comment for TestMsg 1.
-    // Comment for TestMsg 2.
+    // Pre comment for ExampleMsg 1.
+    // Pre comment for ExampleMsg 2.
+
+    public partial class ExampleMsg : BaseMsg
+    {
+        //**********************************************************************
+        // Members:
+
+        // Pre comment for cSize1 1.
+        // pre comment for cSize1 2.
+        public const int cSize1     = 1001;    // Post comment 1
+        public const int cSizeSize2 = 1002;    // Post comment 2
+
+        // Pre comment for mCode1 1.
+        // pre comment for mCode1 2.
+        public int mCode1;        // Post comment 1
+        public int mCode2;
+        public int mCode3;
+        public int mCode4;
+        public int mCodeCode5;    // Post Comment 5
+
+    };
+
+    //**************************************************************************
+    //**************************************************************************
+    //**************************************************************************
 
     public partial class TestMsg : BaseMsg
     {
         //**********************************************************************
         // Members:
 
-        // Comment for mCode1 1.
-        // Comment for mCode1 2.
-        public int mCode1;        // Post comment 1
+        public int mCode1;
         public int mCode2;
         public int mCode3;
         public int mCode4;
-        public int mCodeCode5;    // Post Comment 5
 
     };
 

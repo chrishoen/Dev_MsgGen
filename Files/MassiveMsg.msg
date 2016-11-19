@@ -15,13 +15,19 @@ include_cp  massiveMsg.h
 namespace MassiveMsg
 
 //******************************************************************************
-// Comment for TestMsg 1.
-// Comment for TestMsg 2.
+// Pre comment for ExampleMsg 1.
+// Pre comment for ExampleMsg 2.
 
-message TestMsg
+message ExampleMsg
 {
-   // Comment for mCode1 1.
-   // Comment for mCode1 2.
+   // Pre comment for cSize1 1.
+   // pre comment for cSize1 2.
+
+   const        cSize1     = 1001      // Post comment 1
+   const        cSizeSize2 = 1002      // Post comment 2
+
+   // Pre comment for mCode1 1.
+   // pre comment for mCode1 2.
 
    int          mCode1      // Post comment 1
    int          mCode2
@@ -29,6 +35,16 @@ message TestMsg
    int          mCode4
    int          mCodeCode5  // Post Comment 5
 
+}
+
+//******************************************************************************
+
+message TestMsg
+{
+   int          mCode1
+   int          mCode2
+   int          mCode3
+   int          mCode4
 }
 
 //******************************************************************************

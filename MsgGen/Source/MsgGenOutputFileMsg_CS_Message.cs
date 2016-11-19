@@ -162,8 +162,7 @@ namespace MsgGen
                 mWCS.WritePreCommentList  (2,tConst.mPreCommentList);
 
                 mWCS.Write(2, "public const int {0} = {1};", 
-                    stringExtend(tConst.mName, 
-                    aBlock.mConstMaxSize), 
+                    stringExtend(tConst.mName,aBlock.mConstMaxSize), 
                     tConst.mInitialValue);
 
                 if (String.IsNullOrEmpty(tConst.mPostComment))
@@ -172,7 +171,7 @@ namespace MsgGen
                 }
                 else
                 {
-                    mWCS.WriteSpace(4 + aBlock.mNameMaxSize - tConst.mName.Length);
+                    mWCS.WriteSpace(4);
                     mWCS.Write("{0}",tConst.mPostComment);
                     mWCS.WriteEOL();
                 }
