@@ -157,27 +157,60 @@ namespace MsgGen
             mWCS.WriteLine (2,"// Members:");
             mWCS.WriteSkip ();
 
+            aBlock.mConstList.ForEach(delegate (ConstData tConst)
+            {
+                mWCS.WritePreCommentList  (2,tConst.mPreCommentList);
+
+                mWCS.Write(2, "public const int {0} = {1};", 
+                    stringExtend(tConst.mName, 
+                    aBlock.mConstMaxSize), 
+                    tConst.mInitialValue);
+
+                if (String.IsNullOrEmpty(tConst.mPostComment))
+                {
+                    mWCS.WriteLine("");
+                }
+                else
+                {
+                    mWCS.WriteSpace(4 + aBlock.mNameMaxSize - tConst.mName.Length);
+                    mWCS.WriteLine("{0}",
+                        tConst.mPostComment);
+                }
+            });
+
             if (aBlock.mConstList.Count > 0)
             {
-                aBlock.mConstList.ForEach(delegate (ConstData tConst)
-                {
-                    mWCS.WritePreCommentList  (2,tConst.mPreCommentList);
-                    mWCS.WriteLine(2, "public const int {0} = {1};", stringExtend(tConst.mName, aBlock.mConstMaxSize), tConst.mInitialValue);
-                });
                 mWCS.WriteSkip();
             }
 
             aBlock.mMemberList.ForEach(delegate(MemberData tMember)
             {
                 mWCS.WritePreCommentList  (2,tMember.mPreCommentList);
+
                 if (!tMember.mIsArray)
                 {
-                    mWCS.WriteLine (2, "public {0} {1};", stringExtend(tMember.mTypeNameCS,aBlock.mTypeMaxSize), tMember.mName);
+                    mWCS.Write (2, "public {0} {1};", 
+                        stringExtend(tMember.mTypeNameCS,aBlock.mTypeMaxSize), 
+                        tMember.mName);
                 }
                 else
                 {
-                    mWCS.WriteLine (2, "public {0} {1};", stringExtend(tMember.mTypeNameCS + "[]",aBlock.mTypeMaxSize), tMember.mName);
+                    mWCS.Write (2, "public {0} {1};", 
+                        stringExtend(tMember.mTypeNameCS + "[]",aBlock.mTypeMaxSize), 
+                        tMember.mName);
                 }
+
+                if (String.IsNullOrEmpty(tMember.mPostComment))
+                {
+                    mWCS.WriteLine("");
+                }
+                else
+                {
+                    mWCS.WriteSpace(4 + aBlock.mNameMaxSize - tMember.mName.Length);
+                    mWCS.WriteLine("{0}",
+                        tMember.mPostComment);
+                }
+
 
             });
             mWCS.WriteSkip ();

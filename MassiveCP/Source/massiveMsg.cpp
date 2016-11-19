@@ -14,20 +14,22 @@ TestMsg::TestMsg()
 {
    mMessageType = MsgIdT::cTestMsg;
 
-   mCode1 = 0;
-   mCode2 = 0;
-   mCode3 = 0;
-   mCode4 = 0;
+   mCode1     = 0;
+   mCode2     = 0;
+   mCode3     = 0;
+   mCode4     = 0;
+   mCodeCode5 = 0;
 }
 
 void TestMsg::copyToFrom (Ris::ByteBuffer* aBuffer)
 {
    mHeader.headerCopyToFrom(aBuffer,this);
 
-   aBuffer->copy ( &mCode1 );
-   aBuffer->copy ( &mCode2 );
-   aBuffer->copy ( &mCode3 );
-   aBuffer->copy ( &mCode4 );
+   aBuffer->copy ( &mCode1     );
+   aBuffer->copy ( &mCode2     );
+   aBuffer->copy ( &mCode3     );
+   aBuffer->copy ( &mCode4     );
+   aBuffer->copy ( &mCodeCode5 );
 
    mHeader.headerReCopyToFrom(aBuffer,this);
 }

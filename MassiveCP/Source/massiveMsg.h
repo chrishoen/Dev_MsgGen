@@ -40,10 +40,11 @@ public:
 
     // Comment for mCode1 1.
     // Comment for mCode1 2.
-    int mCode1;
+    int mCode1;        // Post comment 1
     int mCode2;
     int mCode3;
     int mCode4;
+    int mCodeCode5;    // Post Comment 5
 
     //**************************************************************************
     // Methods:
@@ -64,7 +65,6 @@ public:
     // Members:
 
     int mCode1;
-
     //**************************************************************************
     // Methods:
 
@@ -87,7 +87,6 @@ public:
     int mCode2;
     int mCode3;
     int mCode4;
-
     //**************************************************************************
     // Methods:
 
@@ -112,7 +111,6 @@ public:
     int   mCode4;
     int   mWordsLoop;
     int   mWords [4];
-
     //**************************************************************************
     // Methods:
 
@@ -135,7 +133,6 @@ public:
     int mCode2;
     int mCode3;
     int mCode4;
-
     //**************************************************************************
     // Methods:
 
@@ -168,7 +165,6 @@ public:
     char               mString1 [100];
     char               mString2 [100];
     DataRecord         mDataRecord;
-
     //**************************************************************************
     // Methods:
 

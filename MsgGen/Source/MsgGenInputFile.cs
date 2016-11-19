@@ -202,6 +202,8 @@ namespace MsgGen
             tConst.addPreCommentList(mPreCommentList);
             mPreCommentList = new List<String>();
 
+            tConst.addPostComment(aCmd.comment());
+
             mBlockData.addConst(tConst);
         }
 
@@ -274,6 +276,8 @@ namespace MsgGen
                 mPreCommentList = new List<String>();
             }
 
+            tMember.addPostComment(aCmd.comment());
+
             mBlockData.addMember(tMember);
         }
 
@@ -297,6 +301,8 @@ namespace MsgGen
                 tMember1.addPreCommentList(mPreCommentList);
                 mPreCommentList = new List<String>();
             }
+
+            tMember1.addPostComment(aCmd.comment());
 
             mBlockData.addMember(tMember1);
 

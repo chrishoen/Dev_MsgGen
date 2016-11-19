@@ -71,10 +71,11 @@ namespace MassiveMsg
         public TestMsg()
         {
             mMessageType = MsgIdT.cTestMsg;
-            mCode1 = 0;
-            mCode2 = 0;
-            mCode3 = 0;
-            mCode4 = 0;
+            mCode1     = 0;
+            mCode2     = 0;
+            mCode3     = 0;
+            mCode4     = 0;
+            mCodeCode5 = 0;
         }
 
         //**********************************************************************
@@ -88,6 +89,7 @@ namespace MassiveMsg
             aBuffer.copy ( ref mCode2 );
             aBuffer.copy ( ref mCode3 );
             aBuffer.copy ( ref mCode4 );
+            aBuffer.copy ( ref mCodeCode5 );
 
             mHeader.headerReCopyToFrom(aBuffer,this);
         }

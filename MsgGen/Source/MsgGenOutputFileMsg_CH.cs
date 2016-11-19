@@ -222,32 +222,67 @@ namespace MsgGen
             mWCH.WriteLine (1,"// Members:");
             mWCH.WriteSkip ();
 
+            aBlock.mConstList.ForEach(delegate (ConstData tConst)
+            {
+                mWCH.WritePreCommentList  (1,tConst.mPreCommentList);
+
+                mWCH.Write(1, "static const int {0} = {1};",
+                    stringExtend(tConst.mName, 
+                    aBlock.mConstMaxSize), 
+                    tConst.mInitialValue);
+
+                if (String.IsNullOrEmpty(tConst.mPostComment))
+                {
+                    mWCH.WriteLine("");
+                }
+                else
+                {
+                    mWCH.WriteSpace(4 + aBlock.mNameMaxSize - tConst.mName.Length);
+                    mWCH.WriteLine("{0}",
+                        tConst.mPostComment);
+                }
+            });
+
             if (aBlock.mConstList.Count > 0)
             {
-                aBlock.mConstList.ForEach(delegate (ConstData tConst)
-                {
-                    mWCH.WritePreCommentList  (1,tConst.mPreCommentList);
-                    mWCH.WriteLine(1, "static const int {0} = {1};", stringExtend(tConst.mName, aBlock.mConstMaxSize), tConst.mInitialValue);
-                });
                 mWCH.WriteSkip();
             }
 
             aBlock.mMemberList.ForEach(delegate(MemberData tMember)
             {
                 mWCH.WritePreCommentList  (1,tMember.mPreCommentList);
+
                 if (tMember.mMemberType == Defs.cMemberT_String)
                 {
-                    mWCH.WriteLine(1, "{0} {1} [{2}];", stringExtend("char", aBlock.mTypeMaxSize), tMember.mName, tMember.mArraySize);
+                    mWCH.Write(1, "{0} {1} [{2}];", 
+                        stringExtend("char", aBlock.mTypeMaxSize), 
+                        tMember.mName, 
+                        tMember.mArraySize);
                 }
                 else if (!tMember.mIsArray)
                 {
-                    mWCH.WriteLine(1, "{0} {1};", stringExtend(tMember.mTypeNameCP, aBlock.mTypeMaxSize), tMember.mName);
+                    mWCH.Write(1, "{0} {1};",
+                        stringExtend(tMember.mTypeNameCP, aBlock.mTypeMaxSize),
+                        tMember.mName);
                 }
                 else
                 {
-                    mWCH.WriteLine(1, "{0} {1} [{2}];", stringExtend(tMember.mTypeNameCP, aBlock.mTypeMaxSize), tMember.mName, tMember.mArraySize);
+                    mWCH.Write(1, "{0} {1} [{2}];", 
+                        stringExtend(tMember.mTypeNameCP, aBlock.mTypeMaxSize), 
+                        tMember.mName, 
+                        tMember.mArraySize);
                 }
 
+                if (String.IsNullOrEmpty(tMember.mPostComment))
+                {
+                    mWCH.WriteLine("");
+                }
+                else
+                {
+                    mWCH.WriteSpace(4 + aBlock.mNameMaxSize - tMember.mName.Length);
+                    mWCH.WriteLine("{0}",
+                        tMember.mPostComment);
+                }
             });
             mWCH.WriteSkip ();
 

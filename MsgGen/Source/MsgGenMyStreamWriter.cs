@@ -84,6 +84,11 @@ namespace MsgGen
             Write(aFormat,aArgs);
         }
 
+        public void WriteSpace (int aNumOf)
+        {
+            for (int i=0; i<aNumOf; i++) Write(" ");
+        }
+
         public void WriteSkip ()
         {
             if (mLastWasNotEmpty)
