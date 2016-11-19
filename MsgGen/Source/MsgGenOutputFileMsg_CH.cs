@@ -233,13 +233,13 @@ namespace MsgGen
 
                 if (String.IsNullOrEmpty(tConst.mPostComment))
                 {
-                    mWCH.WriteLine("");
+                    mWCH.WriteEOL();
                 }
                 else
                 {
                     mWCH.WriteSpace(4 + aBlock.mNameMaxSize - tConst.mName.Length);
-                    mWCH.WriteLine("{0}",
-                        tConst.mPostComment);
+                    mWCH.Write("{0}",tConst.mPostComment);
+                    mWCH.WriteEOL();
                 }
             });
 
@@ -275,13 +275,13 @@ namespace MsgGen
 
                 if (String.IsNullOrEmpty(tMember.mPostComment))
                 {
-                    mWCH.WriteLine("");
+                    mWCH.WriteEOL();
                 }
                 else
                 {
                     mWCH.WriteSpace(4 + aBlock.mNameMaxSize - tMember.mName.Length);
-                    mWCH.WriteLine("{0}",
-                        tMember.mPostComment);
+                    mWCH.Write("{0}",tMember.mPostComment);
+                    mWCH.WriteEOL();
                 }
             });
             mWCH.WriteSkip ();

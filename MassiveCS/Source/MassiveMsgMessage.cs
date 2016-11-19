@@ -37,6 +37,7 @@ namespace MassiveMsg
         // Members:
 
         public int mCode1;
+
     };
 
     //**************************************************************************
@@ -52,6 +53,7 @@ namespace MassiveMsg
         public int mCode2;
         public int mCode3;
         public int mCode4;
+
     };
 
     //**************************************************************************
@@ -69,6 +71,7 @@ namespace MassiveMsg
         public int   mCode4;
         public int   mWordsLoop;
         public int[] mWords;
+
     };
 
     //**************************************************************************
@@ -84,6 +87,7 @@ namespace MassiveMsg
         public int mCode2;
         public int mCode3;
         public int mCode4;
+
     };
 
     //**************************************************************************
@@ -109,6 +113,7 @@ namespace MassiveMsg
         public string             mString1;
         public string             mString2;
         public DataRecord         mDataRecord;
+
     };
 
 }

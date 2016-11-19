@@ -168,13 +168,13 @@ namespace MsgGen
 
                 if (String.IsNullOrEmpty(tConst.mPostComment))
                 {
-                    mWCS.WriteLine("");
+                    mWCS.WriteEOL();
                 }
                 else
                 {
                     mWCS.WriteSpace(4 + aBlock.mNameMaxSize - tConst.mName.Length);
-                    mWCS.WriteLine("{0}",
-                        tConst.mPostComment);
+                    mWCS.Write("{0}",tConst.mPostComment);
+                    mWCS.WriteEOL();
                 }
             });
 
@@ -202,16 +202,14 @@ namespace MsgGen
 
                 if (String.IsNullOrEmpty(tMember.mPostComment))
                 {
-                    mWCS.WriteLine("");
+                    mWCS.WriteEOL();
                 }
                 else
                 {
                     mWCS.WriteSpace(4 + aBlock.mNameMaxSize - tMember.mName.Length);
-                    mWCS.WriteLine("{0}",
-                        tMember.mPostComment);
+                    mWCS.Write("{0}",tMember.mPostComment);
+                    mWCS.WriteEOL();
                 }
-
-
             });
             mWCS.WriteSkip ();
 

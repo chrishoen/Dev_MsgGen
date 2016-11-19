@@ -27,43 +27,6 @@ namespace MsgGen
             mSpacePerTab = aSpacePerTab;
 
         }
-#if false
-        public MyStreamWriter(Stream stream)
-            : base(stream)
-        {
-
-        }
-        public MyStreamWriter(Stream stream, Encoding encoding)
-            : base(stream, encoding)
-        {
-
-        }
-        public MyStreamWriter(Stream stream, Encoding encoding, int bufferSize)
-            : base(stream, encoding, bufferSize)
-        {
-
-        }
-        public MyStreamWriter(string path, bool append)
-            : base(path, append)
-        {
-
-        }
-        public MyStreamWriter(string path, bool append, Encoding encoding)
-            : base(path, append, encoding)
-        {
-
-        }
-        public MyStreamWriter(string path, bool append, Encoding encoding, int bufferSize)
-            : base(path, append, encoding, bufferSize)
-        {
-
-        }
-
-        public override void Write(string value)
-        {
-            base.Write(value);
-        }
-#endif
         //**********************************************************************
         //**********************************************************************
         //**********************************************************************
@@ -113,6 +76,12 @@ namespace MsgGen
             for (int i=0; i<tSpace; i++) Write(" ");
 
             WriteLine(aFormat,aArgs);
+            mLastWasNotEmpty = true;
+        }
+
+        public void WriteEOL ()
+        {
+            WriteLine("");
             mLastWasNotEmpty = true;
         }
 
