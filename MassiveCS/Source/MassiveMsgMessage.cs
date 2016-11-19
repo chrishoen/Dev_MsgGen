@@ -17,6 +17,8 @@ namespace MassiveMsg
         //**********************************************************************
         // Members:
 
+        // Comment for mCode1 1.
+        // Comment for mCode1 2.
         public int mCode1;
         public int mCode2;
         public int mCode3;

@@ -226,6 +226,7 @@ namespace MsgGen
             {
                 aBlock.mConstList.ForEach(delegate (ConstData tConst)
                 {
+                    mWCH.WritePreCommentList  (1,tConst.mPreCommentList);
                     mWCH.WriteLine(1, "static const int {0} = {1};", stringExtend(tConst.mName, aBlock.mConstMaxSize), tConst.mInitialValue);
                 });
                 mWCH.WriteSkip();
@@ -233,6 +234,7 @@ namespace MsgGen
 
             aBlock.mMemberList.ForEach(delegate(MemberData tMember)
             {
+                mWCH.WritePreCommentList  (1,tMember.mPreCommentList);
                 if (tMember.mMemberType == Defs.cMemberT_String)
                 {
                     mWCH.WriteLine(1, "{0} {1} [{2}];", stringExtend("char", aBlock.mTypeMaxSize), tMember.mName, tMember.mArraySize);

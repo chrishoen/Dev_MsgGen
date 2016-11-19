@@ -20,6 +20,9 @@ namespace MassiveMsg
 
 message TestMsg
 {
+   // Comment for mCode1 1.
+   // Comment for mCode1 2.
+
    int          mCode1
    int          mCode2
    int          mCode3
