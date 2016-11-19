@@ -198,7 +198,6 @@ namespace MsgGen
 
             mWCH.WriteBar  (0,3);
             mWCH.WritePreCommentList  (0,aBlock.mPreCommentList);
-
             mWCH.WriteSkip ();
 
             if (aBlock.mBlockType == Defs.cBlockT_Message)

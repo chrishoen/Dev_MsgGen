@@ -134,6 +134,7 @@ namespace MsgGen
             // Class Begin
 
             mWCS.WriteBar  (1,3);
+            mWCS.WritePreCommentList  (1,aBlock.mPreCommentList);
             mWCS.WriteSkip ();
 
             if (aBlock.mBlockType == Defs.cBlockT_Message)
