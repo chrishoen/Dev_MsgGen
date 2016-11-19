@@ -1,16 +1,6 @@
 //******************************************************************************
-using      System
-using      System.Text
-using      System.IO
-using      Ris
-
-define_ch   _MASSIVEMSG_H_
-include_ch risByteContent.h
-include_ch risByteMsgMonkey.h
-include_ch massiveMsgBase.h
-include_cp  <stdio.h>
-include_cp  <string.h>
-include_cp  massiveMsg.h
+// Comment for message set 1.
+// Comment for message set 2.
 
 namespace MassiveMsg
 
@@ -33,8 +23,10 @@ message ExampleMsg
    int          mCode2
    int          mCode3
    int          mCode4
-   int          mCodeCode5  // Post Comment 5
+   int          mCodeCode5  // Post comment 5
 
+   // Pre comment for mWords
+   int          mWords [4]  // Post comment        
 }
 
 //******************************************************************************
@@ -104,3 +96,23 @@ message DataMag
    string       mString2 [100]
    DataRecord   mDataRecord
 }
+
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+
+using      System
+using      System.Text
+using      System.IO
+using      Ris
+
+define_ch   _MASSIVEMSG_H_
+
+include_ch  risByteContent.h
+include_ch  risByteMsgMonkey.h
+include_ch  massiveMsgBase.h
+
+include_cp  <stdio.h>
+include_cp  <string.h>
+include_cp  massiveMsg.h
+

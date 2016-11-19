@@ -13,7 +13,7 @@ namespace MassiveMsg
 
     public class MsgIdT
     {
-        public const int cUnspecified =   0;
+        public const int cUnspecified       =   0;
         public const int cExampleMsg        =   1;
         public const int cTestMsg           =   2;
         public const int cFirstMessageMsg   =   3;
@@ -80,6 +80,10 @@ namespace MassiveMsg
             mCode3     = 0;
             mCode4     = 0;
             mCodeCode5 = 0;
+
+            mWordsLoop = 4;
+            mWords     = new int[4];
+
         }
 
         //**********************************************************************
@@ -94,6 +98,12 @@ namespace MassiveMsg
             aBuffer.copy ( ref mCode3 );
             aBuffer.copy ( ref mCode4 );
             aBuffer.copy ( ref mCodeCode5 );
+
+            aBuffer.copy ( ref mWordsLoop );
+            for (int i = 0;  i<mWordsLoop; i++ )
+            {
+            aBuffer.copy ( ref mWords[i] );
+            }
 
             mHeader.headerReCopyToFrom(aBuffer,this);
         }

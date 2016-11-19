@@ -5,6 +5,12 @@
 #include "risByteMsgMonkey.h"
 #include "massiveMsgBase.h"
 
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Comment for message set 1.
+// Comment for message set 2.
+
 namespace MassiveMsg
 {
 
@@ -17,7 +23,7 @@ class MsgIdT
 {
 public:
 
-    static const int cUnspecified =   0;
+    static const int cUnspecified       =   0;
     static const int cExampleMsg        =   1;
     static const int cTestMsg           =   2;
     static const int cFirstMessageMsg   =   3;
@@ -46,11 +52,14 @@ public:
 
     // Pre comment for mCode1 1.
     // pre comment for mCode1 2.
-    int mCode1;        // Post comment 1
-    int mCode2;
-    int mCode3;
-    int mCode4;
-    int mCodeCode5;    // Post Comment 5
+    int   mCode1;        // Post comment 1
+    int   mCode2;
+    int   mCode3;
+    int   mCode4;
+    int   mCodeCode5;    // Post comment 5
+    // Pre comment for mWords
+    int   mWordsLoop;    // Post comment
+    int   mWords [4];
 
     //**************************************************************************
     // Methods:

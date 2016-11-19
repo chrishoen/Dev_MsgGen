@@ -3,6 +3,12 @@ using System.Text;
 using System.IO;
 using Ris;
 
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Comment for message set 1.
+// Comment for message set 2.
+
 namespace MassiveMsg
 {
 
@@ -24,11 +30,14 @@ namespace MassiveMsg
 
         // Pre comment for mCode1 1.
         // pre comment for mCode1 2.
-        public int mCode1;        // Post comment 1
-        public int mCode2;
-        public int mCode3;
-        public int mCode4;
-        public int mCodeCode5;    // Post Comment 5
+        public int   mCode1;        // Post comment 1
+        public int   mCode2;
+        public int   mCode3;
+        public int   mCode4;
+        public int   mCodeCode5;    // Post comment 5
+        // Pre comment for mWords
+        public int   mWordsLoop;    // Post comment
+        public int[] mWords;
 
     };
 

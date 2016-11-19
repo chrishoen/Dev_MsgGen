@@ -122,6 +122,10 @@ namespace MsgGen
             mWCH.WriteSkip ();
 
             
+            mWCH.WriteBar  (0,3);
+            mWCH.WritePreCommentList  (0,mFileData.mFileHeaderData.mPreCommentList);
+            mWCH.WriteSkip ();
+
             mWCH.WriteLine ( 0, "namespace {0}",mFileData.mFileHeaderData.mNameSpace);
             mWCH.WriteLine ( 0, "{");
             mWCH.WriteSkip ();
@@ -150,7 +154,7 @@ namespace MsgGen
             mWCH.WriteLine (0, "{");
             mWCH.WriteLine (0, "public:");
             mWCH.WriteSkip ();
-            mWCH.WriteLine (1, "static const int cUnspecified =   0;");
+            mWCH.WriteLine (1, "static const int c{0} = {1,3};", stringExtend("Unspecified",mFileData.mNameMaxSize), 0);
 
             int ident=1;
             mFileData.mBlockList.ForEach(delegate(BlockData tBlock)

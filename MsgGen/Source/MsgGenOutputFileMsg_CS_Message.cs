@@ -108,6 +108,10 @@ namespace MsgGen
             mWCS.WriteSkip ();
 
             
+            mWCS.WriteBar  (0,3);
+            mWCS.WritePreCommentList  (0,mFileData.mFileHeaderData.mPreCommentList);
+            mWCS.WriteSkip ();
+
             mWCS.WriteLine (0, "namespace {0}",mFileData.mFileHeaderData.mNameSpace);
             mWCS.WriteLine (0, "{");
             mWCS.WriteSkip ();

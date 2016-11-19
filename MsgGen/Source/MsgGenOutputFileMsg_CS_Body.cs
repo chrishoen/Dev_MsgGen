@@ -135,7 +135,7 @@ namespace MsgGen
             mWCS.WriteSkip ();
             mWCS.WriteLine (1,"{0}","public class MsgIdT");
             mWCS.WriteLine (1,"{0}","{");
-            mWCS.WriteLine (2,"{0}","public const int cUnspecified =   0;");
+            mWCS.WriteLine (2,"public const int c{0} = {1,3};", stringExtend("Unspecified",mFileData.mNameMaxSize), 0);
 
             int tIdent = 1;
             mFileData.mBlockList.ForEach(delegate(BlockData tBlock)

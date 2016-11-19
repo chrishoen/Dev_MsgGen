@@ -83,20 +83,6 @@ namespace MsgGen
         //**********************************************************************
         //**********************************************************************
 
-        public void processPreComment (CmdLineCmd aCmd)
-        {
-            String tComment = aCmd.comment();
-            if (tComment.Length < 3) return;
-            if (tComment[2].Equals('*')) return;
-
-            mPreCommentList.Add(tComment);
-
-        }
-
-        //**********************************************************************
-        //**********************************************************************
-        //**********************************************************************
-
         public void processUsing (CmdLineCmd aCmd)
         {
             if (mBlockValid == true) return;
@@ -139,6 +125,12 @@ namespace MsgGen
             if (aCmd.NumArg < 1) return;
 
             mFileData.mFileHeaderData.mNameSpace = aCmd.argString(1);
+
+            if (mPreCommentList.Count > 0)
+            {
+               mFileData.mFileHeaderData.addPreCommentList(mPreCommentList);
+               mPreCommentList = new List<String>();
+            }
         }
 
         //**********************************************************************
@@ -390,6 +382,20 @@ namespace MsgGen
             tMember2.mArraySize = tArraySize;
             
             mBlockData.addMember(tMember2);
+        }
+
+        //**********************************************************************
+        //**********************************************************************
+        //**********************************************************************
+
+        public void processPreComment (CmdLineCmd aCmd)
+        {
+            String tComment = aCmd.comment();
+            if (tComment.Length < 3) return;
+            if (tComment[2].Equals('*')) return;
+
+            mPreCommentList.Add(tComment);
+
         }
     };
 }

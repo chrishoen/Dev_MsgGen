@@ -19,6 +19,7 @@ ExampleMsg::ExampleMsg()
    mCode3     = 0;
    mCode4     = 0;
    mCodeCode5 = 0;
+   mWordsLoop = 4;
 }
 
 void ExampleMsg::copyToFrom (Ris::ByteBuffer* aBuffer)
@@ -30,6 +31,12 @@ void ExampleMsg::copyToFrom (Ris::ByteBuffer* aBuffer)
    aBuffer->copy ( &mCode3     );
    aBuffer->copy ( &mCode4     );
    aBuffer->copy ( &mCodeCode5 );
+
+   aBuffer->copy ( &mWordsLoop );
+   for (int i=0;  i<mWordsLoop; i++)
+   {
+   aBuffer->copy ( &mWords[i]  );
+   }
 
    mHeader.headerReCopyToFrom(aBuffer,this);
 }

@@ -48,6 +48,7 @@ namespace MsgGen
         public String       mDefineCH;
         public List<String> mIncludeCHList;
         public List<String> mIncludeCPList;
+        public List<String> mPreCommentList;
 
         //----------------------------------------------------------------------
         // Constructor
@@ -59,6 +60,15 @@ namespace MsgGen
             mDefineCH       = "definech";
             mIncludeCHList = new List<string>();
             mIncludeCPList = new List<string>();
+        }
+
+        //----------------------------------------------------------------------
+
+        public void addPreCommentList(List<String> aPreCommentList)
+        {
+            if (aPreCommentList==null) return;
+            if (aPreCommentList.Count==0) return;
+            mPreCommentList = aPreCommentList;
         }
     };
 
