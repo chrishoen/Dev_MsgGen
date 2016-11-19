@@ -77,6 +77,8 @@ namespace MsgGen
         public String       mTypeNameCP;
         public String       mTypeNameCS;
         public String       mInitialValue;
+        public List<String> mPreCommentList;
+        public String       mPostComment;
 
         public String       mArraySize;
         public bool         mIsArrayIndex;
@@ -180,6 +182,24 @@ namespace MsgGen
                     break;
             }
         }
+
+        //----------------------------------------------------------------------
+
+        public void addPreCommentList(List<String> aPreCommentList)
+        {
+            if (aPreCommentList==null) return;
+            if (aPreCommentList.Count==0) return;
+            mPreCommentList = aPreCommentList;
+        }
+
+        //----------------------------------------------------------------------
+
+        public void addPostComment(String aPostComment)
+        {
+            if (String.IsNullOrEmpty(aPostComment)) return;
+            mPostComment = aPostComment;
+        }
+
     };
 
     //**************************************************************************
@@ -194,6 +214,8 @@ namespace MsgGen
 
         public String       mName;
         public String       mInitialValue;
+        public List<String> mPreCommentList;
+        public String       mPostComment;
 
         //----------------------------------------------------------------------
         // Constructor
@@ -203,6 +225,24 @@ namespace MsgGen
             mName = "name";
             mInitialValue = "initial";
         }
+
+        //----------------------------------------------------------------------
+
+        public void addPreCommentList(List<String> aPreCommentList)
+        {
+            if (aPreCommentList==null) return;
+            if (aPreCommentList.Count==0) return;
+            mPreCommentList = aPreCommentList;
+        }
+
+        //----------------------------------------------------------------------
+
+        public void addPostComment(String aPostComment)
+        {
+            if (String.IsNullOrEmpty(aPostComment)) return;
+            mPostComment = aPostComment;
+        }
+
     };
 
     //**************************************************************************
@@ -219,6 +259,7 @@ namespace MsgGen
         public String           mName;
         public List<ConstData>  mConstList;
         public List<MemberData> mMemberList;
+        public List<String>     mPreCommentList;
         public int              mConstMaxSize;
         public int              mNameMaxSize;
         public int              mTypeMaxSize;
@@ -277,6 +318,16 @@ namespace MsgGen
                 }
             }
         }
+
+        //----------------------------------------------------------------------
+
+        public void addPreCommentList(List<String> aPreCommentList)
+        {
+            if (aPreCommentList==null) return;
+            if (aPreCommentList.Count==0) return;
+            mPreCommentList = aPreCommentList;
+        }
+
     };
 
     //**************************************************************************

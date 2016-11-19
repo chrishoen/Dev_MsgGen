@@ -124,6 +124,22 @@ namespace MsgGen
             }
             mLastWasNotEmpty = true;
         }
+
+        public void WritePreCommentList (int aTab,List<String> aPreCommentList)
+        {
+            if (aPreCommentList==null) return;
+            if (aPreCommentList.Count==0) return;
+
+            int tNumOf = aPreCommentList.Count;
+            int tSpace = aTab*mSpacePerTab;
+
+            for (int i = 0; i < tNumOf; i++)
+            {
+                for (int j = 0; j < tSpace; j++) Write(" ");
+                WriteLine("{0}",aPreCommentList[i]);
+            }
+            mLastWasNotEmpty = true;
+        }
     }
 
 }//namespace

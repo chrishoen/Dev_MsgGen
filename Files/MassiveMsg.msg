@@ -15,6 +15,8 @@ include_cp  massiveMsg.h
 namespace MassiveMsg
 
 //******************************************************************************
+// Comment for TestMsg 1.
+// Comment for TestMsg 2.
 
 message TestMsg
 {

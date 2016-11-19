@@ -1,5 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Text;
+using System.IO;
+
 using Ris;
 
 namespace MsgGen
@@ -14,9 +17,11 @@ namespace MsgGen
         //---------------------------------------------------------------------------
         // Members
 
-        FileData    mFileData;
-        BlockData   mBlockData;
-        bool        mBlockValid;
+        FileData       mFileData;
+        BlockData      mBlockData;
+        bool           mBlockValid;
+        List<String>   mPreCommentList;
+
 
         //---------------------------------------------------------------------------
         // Constructor
@@ -25,6 +30,7 @@ namespace MsgGen
         {
             mFileData   = aFileData;
             mBlockValid = false;
+            mPreCommentList = new List<String>();
         }
 
         public void show()
@@ -64,10 +70,26 @@ namespace MsgGen
             if (aCmd.isCmd("double"))       processMember     (Defs.cMemberT_Double,aCmd);
             if (aCmd.isCmd("string"))       processString     (aCmd);
 
+            if (aCmd.isComment())           processPreComment (aCmd);
+
             if (aCmd.isBadCmd() && mBlockValid)
             {
                 processRecord(aCmd);
             }
+
+        }
+
+        //**********************************************************************
+        //**********************************************************************
+        //**********************************************************************
+
+        public void processPreComment (CmdLineCmd aCmd)
+        {
+            String tComment = aCmd.comment();
+            if (tComment.Length < 3) return;
+            if (tComment[2].Equals('*')) return;
+
+            mPreCommentList.Add(tComment);
 
         }
 
@@ -131,6 +153,12 @@ namespace MsgGen
             mBlockData.mBlockType = aBlockType;
             mBlockData.mName = aCmd.argString(1);
             mBlockValid = false;
+
+            if (mPreCommentList.Count > 0)
+            {
+               mBlockData.addPreCommentList(mPreCommentList);
+               mPreCommentList = new List<String>();
+            }
         }
 
         //**********************************************************************
@@ -170,6 +198,9 @@ namespace MsgGen
             {
                 tConst.mInitialValue = aCmd.argString(3);
             }
+
+            tConst.addPreCommentList(mPreCommentList);
+            mPreCommentList = new List<String>();
 
             mBlockData.addConst(tConst);
         }
@@ -237,6 +268,12 @@ namespace MsgGen
                 }
             }
 
+            if (mPreCommentList.Count > 0)
+            {
+                tMember.addPreCommentList(mPreCommentList);
+                mPreCommentList = new List<String>();
+            }
+
             mBlockData.addMember(tMember);
         }
 
@@ -254,6 +291,12 @@ namespace MsgGen
             tMember1.mName = aCmd.argString(1) + "Loop";
             tMember1.mInitialValue = tArraySize;
             tMember1.mIsArrayIndex = true;
+
+            if (mPreCommentList.Count > 0)
+            {
+                tMember1.addPreCommentList(mPreCommentList);
+                mPreCommentList = new List<String>();
+            }
 
             mBlockData.addMember(tMember1);
 
@@ -298,6 +341,12 @@ namespace MsgGen
             tMember.mTypeNameCS = aCmd.argString(0);
             tMember.mName = aCmd.argString(1);
 
+            if (mPreCommentList.Count > 0)
+            {
+                tMember.addPreCommentList(mPreCommentList);
+                mPreCommentList = new List<String>();
+            }
+
             mBlockData.addMember(tMember);
         }
 
@@ -315,6 +364,12 @@ namespace MsgGen
             tMember1.mName = aCmd.argString(1) + "Loop";
             tMember1.mInitialValue = tArraySize;
             tMember1.mIsArrayIndex = true;
+
+            if (mPreCommentList.Count > 0)
+            {
+                tMember1.addPreCommentList(mPreCommentList);
+                mPreCommentList = new List<String>();
+            }
 
             mBlockData.addMember(tMember1);
 
