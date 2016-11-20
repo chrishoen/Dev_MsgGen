@@ -57,6 +57,7 @@
     <Compile Include="Source\MsgGenOutputFileMsg_CS_Message.cs" />
     <Compile Include="Source\MsgGenReader.cs" />
     <Compile Include="Source\MsgGenWriter.cs" />
+    <Compile Include="Source\MyLaunch.cs" />
     <Compile Include="Source\MyCmdLineExec.cs" />
     <Compile Include="Source\Program.cs" />
   </ItemGroup>

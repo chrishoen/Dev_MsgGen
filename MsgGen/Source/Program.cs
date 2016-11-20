@@ -1,3 +1,5 @@
+#pragma warning disable CS0162 
+
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,8 +13,15 @@ namespace MainApp
         static void Main(string[] args)
         {
             Prn.initializeForConsole();
-            MyCmdLineExec tCmdLineExec = new MyCmdLineExec();
-            CmdLineConsole.execute(tCmdLineExec);
+            if (false)
+            {
+                MyCmdLineExec tCmdLineExec = new MyCmdLineExec();
+                CmdLineConsole.execute(tCmdLineExec);
+            }
+            else
+            {
+                MyLaunch.generate(args);
+            }
         }
     }
 }
