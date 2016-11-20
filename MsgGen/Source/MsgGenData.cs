@@ -343,9 +343,9 @@ namespace MsgGen
     //**************************************************************************
     //**************************************************************************
     //**************************************************************************
-    // File data 
+    // Input file data 
 
-    public class FileData
+    public class InputData
     {
         //----------------------------------------------------------------------
         // Members
@@ -354,10 +354,15 @@ namespace MsgGen
         public List<BlockData>  mBlockList;
         public int              mNameMaxSize;
 
+        public String mWriteFilePathCSMessage;
+        public String mWriteFilePathCSBody;
+        public String mWriteFilePathCH;
+        public String mWriteFilePathCP;
+
         //----------------------------------------------------------------------
         // Constructor
 
-        public FileData()
+        public InputData()
         {
             mFileHeaderData  = new FileHeaderData();
             mBlockList   = new List<BlockData>();
@@ -376,19 +381,5 @@ namespace MsgGen
             }
         }
     };
-    //**************************************************************************
-    //**************************************************************************
-    //**************************************************************************
-    // Output data 
 
-    public class OutputData
-    {
-        //----------------------------------------------------------------------
-        // Members
-
-        public String mWriteFilePathCSMessage;
-        public String mWriteFilePathCSBody;
-        public String mWriteFilePathCH;
-        public String mWriteFilePathCP;
-    };
 }

@@ -17,7 +17,7 @@ namespace MsgGen
         // Members
 
         public MyStreamWriter mWCP;
-        public FileData mFileData;
+        public InputData mInputData;
 
         public int mNumNameSpace;
         public int mIndent;
@@ -68,13 +68,13 @@ namespace MsgGen
         //**********************************************************************
         // Write
 
-        public override void write(FileData aFileData)
+        public override void write(InputData aInputData)
         {
-            mFileData = aFileData;
+            mInputData = aInputData;
 
             writeFileBegin();
 
-            mFileData.mBlockList.ForEach(delegate(BlockData tBlock)
+            mInputData.mBlockList.ForEach(delegate(BlockData tBlock)
             {
                 writeBlock(tBlock);
             });
@@ -103,7 +103,7 @@ namespace MsgGen
 
         public void writeFileBegin()
         {
-            mFileData.mFileHeaderData.mIncludeCPList.ForEach(delegate(String tString)
+            mInputData.mFileHeaderData.mIncludeCPList.ForEach(delegate(String tString)
             {
                 if (tString.StartsWith("<"))
                 {
@@ -117,7 +117,7 @@ namespace MsgGen
             mWCP.WriteSkip ();
 
             
-            mWCP.WriteLine ( 0, "namespace {0}",mFileData.mFileHeaderData.mNameSpace);
+            mWCP.WriteLine ( 0, "namespace {0}",mInputData.mFileHeaderData.mNameSpace);
             mWCP.WriteLine ( 0, "{");
             mWCP.WriteSkip ();
         }
@@ -147,7 +147,7 @@ namespace MsgGen
             mWCP.WriteLine (1, "switch (aMessageType)");
             mWCP.WriteLine (1, "{");
 
-            mFileData.mBlockList.ForEach(delegate(BlockData tBlock)
+            mInputData.mBlockList.ForEach(delegate(BlockData tBlock)
             {
                 if (tBlock.mBlockType == Defs.cBlockT_Message)
                 {

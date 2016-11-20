@@ -17,7 +17,7 @@ namespace MsgGen
         // Members
 
         public MyStreamWriter mWCS;
-        public FileData mFileData;
+        public InputData mInputData;
 
         public int mNumNameSpace;
         public int mIndent;
@@ -68,15 +68,15 @@ namespace MsgGen
         //**********************************************************************
         // Write
 
-        public override void write(FileData aFileData)
+        public override void write(InputData aInputData)
         {
-            mFileData = aFileData;
+            mInputData = aInputData;
 
             writeFileBegin();
             writeIdentifiers();
             writeMessageCreator();
 
-            mFileData.mBlockList.ForEach(delegate(BlockData tBlock)
+            mInputData.mBlockList.ForEach(delegate(BlockData tBlock)
             {
                 writeBlock(tBlock);
             });
@@ -103,14 +103,14 @@ namespace MsgGen
 
         public void writeFileBegin()
         {
-            mFileData.mFileHeaderData.mUsingList.ForEach(delegate(String name)
+            mInputData.mFileHeaderData.mUsingList.ForEach(delegate(String name)
             {
                 mWCS.WriteLine (0, "using {0};",name);
             });
             mWCS.WriteSkip ();
 
             
-            mWCS.WriteLine (0, "namespace {0}",mFileData.mFileHeaderData.mNameSpace);
+            mWCS.WriteLine (0, "namespace {0}",mInputData.mFileHeaderData.mNameSpace);
             mWCS.WriteLine (0, "{");
             mWCS.WriteSkip ();
         }
@@ -135,14 +135,14 @@ namespace MsgGen
             mWCS.WriteSkip ();
             mWCS.WriteLine (1,"{0}","public class MsgIdT");
             mWCS.WriteLine (1,"{0}","{");
-            mWCS.WriteLine (2,"public const int c{0} = {1,3};", stringExtend("Unspecified",mFileData.mNameMaxSize), 0);
+            mWCS.WriteLine (2,"public const int c{0} = {1,3};", stringExtend("Unspecified",mInputData.mNameMaxSize), 0);
 
             int tIdent = 1;
-            mFileData.mBlockList.ForEach(delegate(BlockData tBlock)
+            mInputData.mBlockList.ForEach(delegate(BlockData tBlock)
             {
                 if (tBlock.mBlockType == Defs.cBlockT_Message)
                 {
-                    mWCS.WriteLine (2,"public const int c{0} = {1,3};", stringExtend(tBlock.mName,mFileData.mNameMaxSize), tIdent++);
+                    mWCS.WriteLine (2,"public const int c{0} = {1,3};", stringExtend(tBlock.mName,mInputData.mNameMaxSize), tIdent++);
                 }
             });
 
@@ -171,7 +171,7 @@ namespace MsgGen
             mWCS.WriteLine (3, "switch (aMessageType)");
             mWCS.WriteLine (3, "{");
 
-            mFileData.mBlockList.ForEach(delegate(BlockData tBlock)
+            mInputData.mBlockList.ForEach(delegate(BlockData tBlock)
             {
                 if (tBlock.mBlockType == Defs.cBlockT_Message)
                 {

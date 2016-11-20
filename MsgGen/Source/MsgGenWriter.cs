@@ -14,10 +14,16 @@ namespace MsgGen
         //**************************************************************************
         //**************************************************************************
         //**************************************************************************
-        // Read from settings file
+        // Write to output file.
 
-        public static void writeToFilePath(OutputFileBase aOutputFile, FileData aFileData, String aFilePath)
+        public static void writeToFilePath(OutputFileBase aOutputFile, InputData aInputData, String aFilePath)
         {
+            if (String.IsNullOrEmpty(aFilePath))
+            {
+                Console.WriteLine("MsgGen.Writer.writeToFilePath EMPTY\n");
+                return;
+            }
+
             // Open outputfile
             if (!aOutputFile.open(aFilePath))
             {
@@ -30,7 +36,7 @@ namespace MsgGen
             }
 
             // Write the file data to the output file
-            aOutputFile.write(aFileData);
+            aOutputFile.write(aInputData);
 
             // Close output file
             aOutputFile.close();

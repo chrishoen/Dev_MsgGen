@@ -17,8 +17,7 @@ namespace MsgGen
         //---------------------------------------------------------------------------
         // Members
 
-        public FileData       mFileData;
-        public OutputData     mOutputData;
+        public InputData      mInputData;
         public BlockData      mBlockData;
         public bool           mBlockValid;
         public List<String>   mPreCommentList;
@@ -26,16 +25,16 @@ namespace MsgGen
         //---------------------------------------------------------------------------
         // Constructor
 
-        public InputFile(FileData aFileData)
+        public InputFile(InputData aInputData)
         {
-            mFileData   = aFileData;
+            mInputData   = aInputData;
             mBlockValid = false;
             mPreCommentList = new List<String>();
         }
 
         public void show()
         {
-            Console.WriteLine("mFileData.mBlockList.Count {0}", mFileData.mBlockList.Count);
+            Console.WriteLine("mInputData.mBlockList.Count {0}", mInputData.mBlockList.Count);
         }
 
         //---------------------------------------------------------------------------
@@ -44,10 +43,10 @@ namespace MsgGen
         public override void execute(CmdLineCmd aCmd)
         {
             // Read Members
-            if (aCmd.isCmd("mWriteFilePathCSMessage"))  mOutputData.mWriteFilePathCSMessage = aCmd.argString(1);
-            if (aCmd.isCmd("mWriteFilePathCSBody"))     mOutputData.mWriteFilePathCSBody = aCmd.argString(1);
-            if (aCmd.isCmd("mWriteFilePathCH"))         mOutputData.mWriteFilePathCH = aCmd.argString(1);
-            if (aCmd.isCmd("mWriteFilePathCP"))         mOutputData.mWriteFilePathCP = aCmd.argString(1);
+            if (aCmd.isCmd("WriteFilePathCSMessage"))  mInputData.mWriteFilePathCSMessage = aCmd.argString(1);
+            if (aCmd.isCmd("WriteFilePathCSBody"))     mInputData.mWriteFilePathCSBody = aCmd.argString(1);
+            if (aCmd.isCmd("WriteFilePathCH"))         mInputData.mWriteFilePathCH = aCmd.argString(1);
+            if (aCmd.isCmd("WriteFilePathCP"))         mInputData.mWriteFilePathCP = aCmd.argString(1);
 
             if (aCmd.isCmd("Using"))        processUsing      (aCmd);
             if (aCmd.isCmd("Define_CH"))    processDefineCH   (aCmd);
@@ -93,7 +92,7 @@ namespace MsgGen
             if (mBlockValid == true) return;
             if (aCmd.NumArg < 1) return;
 
-            mFileData.mFileHeaderData.mUsingList.Add (aCmd.argString(1));
+            mInputData.mFileHeaderData.mUsingList.Add (aCmd.argString(1));
         }
 
         public void processDefineCH (CmdLineCmd aCmd)
@@ -101,7 +100,7 @@ namespace MsgGen
             if (mBlockValid == true) return;
             if (aCmd.NumArg < 1) return;
 
-            mFileData.mFileHeaderData.mDefineCH = aCmd.argString(1);
+            mInputData.mFileHeaderData.mDefineCH = aCmd.argString(1);
         }
 
         public void processIncludeCH (CmdLineCmd aCmd)
@@ -109,7 +108,7 @@ namespace MsgGen
             if (mBlockValid == true) return;
             if (aCmd.NumArg < 1) return;
 
-            mFileData.mFileHeaderData.mIncludeCHList.Add (aCmd.argString(1));
+            mInputData.mFileHeaderData.mIncludeCHList.Add (aCmd.argString(1));
         }
 
         public void processIncludeCP (CmdLineCmd aCmd)
@@ -117,7 +116,7 @@ namespace MsgGen
             if (mBlockValid == true) return;
             if (aCmd.NumArg < 1) return;
 
-            mFileData.mFileHeaderData.mIncludeCPList.Add (aCmd.argString(1));
+            mInputData.mFileHeaderData.mIncludeCPList.Add (aCmd.argString(1));
         }
 
         //**********************************************************************
@@ -129,11 +128,11 @@ namespace MsgGen
             if (mBlockValid == true) return;
             if (aCmd.NumArg < 1) return;
 
-            mFileData.mFileHeaderData.mNameSpace = aCmd.argString(1);
+            mInputData.mFileHeaderData.mNameSpace = aCmd.argString(1);
 
             if (mPreCommentList.Count > 0)
             {
-               mFileData.mFileHeaderData.addPreCommentList(mPreCommentList);
+               mInputData.mFileHeaderData.addPreCommentList(mPreCommentList);
                mPreCommentList = new List<String>();
             }
         }
@@ -177,7 +176,7 @@ namespace MsgGen
         {
             if (mBlockValid == false) return;
 
-            mFileData.addBlock(mBlockData);
+            mInputData.addBlock(mBlockData);
             mBlockValid = false;
         }
 

@@ -14,7 +14,7 @@ namespace MsgGen
 
         public abstract bool open (String aFilePath);
         public abstract void close ();
-        public abstract void write(FileData aFileData);
+        public abstract void write(InputData aInputData);
     };
 
 }//namespace

@@ -16,9 +16,9 @@ namespace MsgGen
         //**************************************************************************
         // Read from settings file
 
-        public static void readFromFilePath(FileData tFileData, String aFilePath)
+        public static void readFromFilePath(InputData tInputData, String aFilePath)
         {
-            MsgGen.InputFile tInputFile = new MsgGen.InputFile(tFileData);
+            MsgGen.InputFile tInputFile = new MsgGen.InputFile(tInputData);
 
             CmdLineFile tCmdLineFile = new CmdLineFile();
 

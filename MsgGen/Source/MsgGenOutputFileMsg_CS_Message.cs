@@ -17,7 +17,7 @@ namespace MsgGen
         // Members
 
         public MyStreamWriter mWCS;
-        public FileData mFileData;
+        public InputData mInputData;
 
         public int mNumNameSpace;
         public int mIndent;
@@ -68,13 +68,13 @@ namespace MsgGen
         //**********************************************************************
         // Write
 
-        public override void write(FileData aFileData)
+        public override void write(InputData aInputData)
         {
-            mFileData = aFileData;
+            mInputData = aInputData;
 
             writeFileBegin();
 
-            mFileData.mBlockList.ForEach(delegate(BlockData tBlock)
+            mInputData.mBlockList.ForEach(delegate(BlockData tBlock)
             {
                 writeBlock(tBlock);
             });
@@ -101,7 +101,7 @@ namespace MsgGen
 
         public void writeFileBegin()
         {
-            mFileData.mFileHeaderData.mUsingList.ForEach(delegate(String name)
+            mInputData.mFileHeaderData.mUsingList.ForEach(delegate(String name)
             {
                 mWCS.WriteLine (0, "using {0};",name);
             });
@@ -109,10 +109,10 @@ namespace MsgGen
 
             
             mWCS.WriteBar  (0,3);
-            mWCS.WritePreCommentList  (0,mFileData.mFileHeaderData.mPreCommentList);
+            mWCS.WritePreCommentList  (0,mInputData.mFileHeaderData.mPreCommentList);
             mWCS.WriteSkip ();
 
-            mWCS.WriteLine (0, "namespace {0}",mFileData.mFileHeaderData.mNameSpace);
+            mWCS.WriteLine (0, "namespace {0}",mInputData.mFileHeaderData.mNameSpace);
             mWCS.WriteLine (0, "{");
             mWCS.WriteSkip ();
         }

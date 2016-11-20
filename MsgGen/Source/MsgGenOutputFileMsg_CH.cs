@@ -17,7 +17,7 @@ namespace MsgGen
         // Members
 
         public MyStreamWriter mWCH;
-        public FileData mFileData;
+        public InputData mInputData;
 
         public int mNumNameSpace;
         public int mIndent;
@@ -68,14 +68,14 @@ namespace MsgGen
         //**********************************************************************
         // Write
 
-        public override void write(FileData aFileData)
+        public override void write(InputData aInputData)
         {
-            mFileData = aFileData;
+            mInputData = aInputData;
 
             writeFileBegin();
             writeIdentifiers();
 
-            mFileData.mBlockList.ForEach(delegate(BlockData tBlock)
+            mInputData.mBlockList.ForEach(delegate(BlockData tBlock)
             {
                 writeBlock(tBlock);
             });
@@ -104,11 +104,11 @@ namespace MsgGen
 
         public void writeFileBegin()
         {
-            mWCH.WriteLine (0, "#ifndef {0}", mFileData.mFileHeaderData.mDefineCH);
-            mWCH.WriteLine (0, "#define {0}", mFileData.mFileHeaderData.mDefineCH);
+            mWCH.WriteLine (0, "#ifndef {0}", mInputData.mFileHeaderData.mDefineCH);
+            mWCH.WriteLine (0, "#define {0}", mInputData.mFileHeaderData.mDefineCH);
             mWCH.WriteSkip ();
 
-            mFileData.mFileHeaderData.mIncludeCHList.ForEach(delegate(String tString)
+            mInputData.mFileHeaderData.mIncludeCHList.ForEach(delegate(String tString)
             {
                 if (tString.StartsWith("<"))
                 {
@@ -123,10 +123,10 @@ namespace MsgGen
 
             
             mWCH.WriteBar  (0,3);
-            mWCH.WritePreCommentList  (0,mFileData.mFileHeaderData.mPreCommentList);
+            mWCH.WritePreCommentList  (0,mInputData.mFileHeaderData.mPreCommentList);
             mWCH.WriteSkip ();
 
-            mWCH.WriteLine ( 0, "namespace {0}",mFileData.mFileHeaderData.mNameSpace);
+            mWCH.WriteLine ( 0, "namespace {0}",mInputData.mFileHeaderData.mNameSpace);
             mWCH.WriteLine ( 0, "{");
             mWCH.WriteSkip ();
         }
@@ -154,14 +154,14 @@ namespace MsgGen
             mWCH.WriteLine (0, "{");
             mWCH.WriteLine (0, "public:");
             mWCH.WriteSkip ();
-            mWCH.WriteLine (1, "static const int c{0} = {1,3};", stringExtend("Unspecified",mFileData.mNameMaxSize), 0);
+            mWCH.WriteLine (1, "static const int c{0} = {1,3};", stringExtend("Unspecified",mInputData.mNameMaxSize), 0);
 
             int ident=1;
-            mFileData.mBlockList.ForEach(delegate(BlockData tBlock)
+            mInputData.mBlockList.ForEach(delegate(BlockData tBlock)
             {
                 if (tBlock.mBlockType == Defs.cBlockT_Message)
                 {
-                    mWCH.WriteLine (1, "static const int c{0} = {1,3};", stringExtend(tBlock.mName,mFileData.mNameMaxSize), ident++);
+                    mWCH.WriteLine (1, "static const int c{0} = {1,3};", stringExtend(tBlock.mName,mInputData.mNameMaxSize), ident++);
                 }
             });
 
