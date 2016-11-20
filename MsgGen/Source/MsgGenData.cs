@@ -376,4 +376,19 @@ namespace MsgGen
             }
         }
     };
+    //**************************************************************************
+    //**************************************************************************
+    //**************************************************************************
+    // Output data 
+
+    public class OutputData
+    {
+        //----------------------------------------------------------------------
+        // Members
+
+        public String mWriteFilePathCSMessage;
+        public String mWriteFilePathCSBody;
+        public String mWriteFilePathCH;
+        public String mWriteFilePathCP;
+    };
 }

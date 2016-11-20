@@ -17,11 +17,11 @@ namespace MsgGen
         //---------------------------------------------------------------------------
         // Members
 
-        FileData       mFileData;
-        BlockData      mBlockData;
-        bool           mBlockValid;
-        List<String>   mPreCommentList;
-
+        public FileData       mFileData;
+        public OutputData     mOutputData;
+        public BlockData      mBlockData;
+        public bool           mBlockValid;
+        public List<String>   mPreCommentList;
 
         //---------------------------------------------------------------------------
         // Constructor
@@ -44,6 +44,11 @@ namespace MsgGen
         public override void execute(CmdLineCmd aCmd)
         {
             // Read Members
+            if (aCmd.isCmd("mWriteFilePathCSMessage"))  mOutputData.mWriteFilePathCSMessage = aCmd.argString(1);
+            if (aCmd.isCmd("mWriteFilePathCSBody"))     mOutputData.mWriteFilePathCSBody = aCmd.argString(1);
+            if (aCmd.isCmd("mWriteFilePathCH"))         mOutputData.mWriteFilePathCH = aCmd.argString(1);
+            if (aCmd.isCmd("mWriteFilePathCP"))         mOutputData.mWriteFilePathCP = aCmd.argString(1);
+
             if (aCmd.isCmd("Using"))        processUsing      (aCmd);
             if (aCmd.isCmd("Define_CH"))    processDefineCH   (aCmd);
             if (aCmd.isCmd("Include_CH"))   processIncludeCH  (aCmd);

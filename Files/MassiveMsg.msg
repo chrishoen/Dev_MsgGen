@@ -1,4 +1,7 @@
 //******************************************************************************
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
 // Comment for message set 1.
 // Comment for message set 2.
 
@@ -100,6 +103,7 @@ message DataMag
 //******************************************************************************
 //******************************************************************************
 //******************************************************************************
+// File header data
 
 using      System
 using      System.Text
@@ -116,3 +120,12 @@ include_cp  <stdio.h>
 include_cp  <string.h>
 include_cp  massiveMsg.h
 
+//******************************************************************************
+//******************************************************************************
+//******************************************************************************
+// Output file paths
+
+WriteFilePathCSMessage   C:\Prime\DevelopComm\Dev_MsgGen\MassiveCS\Source\MassiveMsgMessage.cs
+WriteFilePathCSBody      C:\Prime\DevelopComm\Dev_MsgGen\MassiveCS\Source\MassiveMsgBody.cs
+WriteFilePathCH          C:\Prime\DevelopComm\Dev_MsgGen\MassiveCP\Source\massiveMsg.h
+WriteFilePathCP          C:\Prime\DevelopComm\Dev_MsgGen\MassiveCP\Source\massiveMsg.cpp
