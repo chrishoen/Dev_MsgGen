@@ -37,6 +37,15 @@ namespace MainApp
 
         public void OnGo1(CmdLineCmd aCmd)
         {
+            aCmd.setArgDefault(1,1);
+            int tN = aCmd.argInt(1);
+            System.Random tRandom = new Random();
+
+            for (int i = 0; i < tN; i++)
+            {
+                double tX = tRandom.NextDouble();
+                Console.WriteLine("{0}  X = {1}", i,tX);
+            }
         }
 
         //**********************************************************************
@@ -69,7 +78,6 @@ namespace MainApp
 
             Console.WriteLine("{0}", tN);
         }
-
 
         //**********************************************************************
 
