@@ -34,6 +34,8 @@ namespace MainApp
         }
 
         //**********************************************************************
+        //**********************************************************************
+        //**********************************************************************
 
         public void OnGo1(CmdLineCmd aCmd)
         {
@@ -49,16 +51,27 @@ namespace MainApp
         }
 
         //**********************************************************************
+        //**********************************************************************
+        //**********************************************************************
 
         public void OnGo2(CmdLineCmd aCmd)
         {
-            aCmd.setArgDefault(1, "aaaaaaa");
-            aCmd.setArgDefault(2, 111);
-            aCmd.setArgDefault(3, 22.22);
+            aCmd.setArgDefault(1,1);
+            aCmd.setArgDefault(1,10);
 
-            Console.WriteLine("{0} {1} {2}", aCmd.argString(1), aCmd.argInt(2), aCmd.argDouble(3));
+            int tN = aCmd.argInt(1);
+            int tK = aCmd.argInt(2);
+            System.Random tRandom = new Random();
+
+            for (int i = 0; i < tN; i++)
+            {
+                int tX = tRandom.Next(tK);
+                Console.WriteLine("{0}  X = {1}", i,tX);
+            }
         }
 
+        //**********************************************************************
+        //**********************************************************************
         //**********************************************************************
 
         public void OnGo3(CmdLineCmd aCmd)
